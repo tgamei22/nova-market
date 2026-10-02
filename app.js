@@ -1,6 +1,15 @@
-// Base de dados simulada de produtos - 33 Produtos de Dropshipping (Tendências 2028)
+// Base de dados simulada de produtos - 40 Produtos com Imagens Reais de Dropshipping
 const products = [
-    // --- Produtos Anteriores (Smart Home, Cobre & Inovação) ---
+    // --- Cabos e Carregadores ---
+    { id: 34, name: "Cabo USB-C para USB-C Reforçado em Nylon 2m", category: "acessorios", price: 14.99, image: "https://images.unsplash.com/photo-1583863788434-e58a36330cf0?w=500&auto=format&fit=crop&q=60" },
+    { id: 35, name: "Cabo Rápido Lightning para iPhone em Kevlar", category: "acessorios", price: 16.99, image: "https://images.unsplash.com/photo-1585338107529-13afc5f02c86?w=500&auto=format&fit=crop&q=60" },
+    { id: 36, name: "Carregador de Tomada USB Rápido 20W (PD)", category: "tecnologia", price: 21.99, image: "https://images.unsplash.com/photo-1619946794135-7bc917a27793?w=500&auto=format&fit=crop&q=60" },
+    { id: 37, name: "Carregador de Tomada Múltiplo USB 4 Portas", category: "tecnologia", price: 27.50, image: "https://images.unsplash.com/photo-1584438784894-089d6a62b8fa?w=500&auto=format&fit=crop&q=60" },
+    { id: 38, name: "Cabo Universal 3 em 1 Retrátil (iPhone / Tipo-C / Micro-USB)", category: "acessorios", price: 15.50, image: "https://images.unsplash.com/photo-1544652478-6653e09f18a2?w=500&auto=format&fit=crop&q=60" },
+    { id: 39, name: "Carregador de Tomada GaN Ultra-Rápido 65W", category: "tecnologia", price: 45.00, image: "https://images.unsplash.com/photo-1591337676887-a217a6970a8a?w=500&auto=format&fit=crop&q=60" },
+    { id: 40, name: "Cabo Magnético Rotativo 360º para Carregamento", category: "acessorios", price: 17.99, image: "https://images.unsplash.com/photo-1616440347437-b1c73416efc2?w=500&auto=format&fit=crop&q=60" },
+
+    // --- Smart Home, Cobre & Inovação ---
     { id: 1, name: "Fechadura Inteligente Biométrica c/ Wi-Fi", category: "tecnologia", price: 129.99, image: "https://images.unsplash.com/photo-1558002038-1055907df827?w=500&auto=format&fit=crop&q=60" },
     { id: 2, name: "Sensor de Movimento Inteligente Zigbee", category: "tecnologia", price: 24.99, image: "https://images.unsplash.com/photo-1558089687-f282ffcbc126?w=500&auto=format&fit=crop&q=60" },
     { id: 3, name: "Painel de Cobre LED Decorativo Parede", category: "casa", price: 79.50, image: "https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?w=500&auto=format&fit=crop&q=60" },
@@ -14,8 +23,6 @@ const products = [
     { id: 11, name: "Organizador de Cabos de Cobre Escovado", category: "casa", price: 19.99, image: "https://images.unsplash.com/photo-1583863788434-e58a36330cf0?w=500&auto=format&fit=crop&q=60" },
     { id: 12, name: "Óculos Inteligentes com Áudio Integrado Bluetooth", category: "tecnologia", price: 119.00, image: "https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=500&auto=format&fit=crop&q=60" },
     { id: 13, name: "Escova de Dentes Ultrassónica Inteligente", category: "bem-estar", price: 39.99, image: "https://images.unsplash.com/photo-1559595500-e14231160413?w=500&auto=format&fit=crop&q=60" },
-
-    // --- Mais 20 Produtos Adicionados (Tendências Populares) ---
     { id: 14, name: "Câmara de Segurança Solar Wi-Fi PTZ 360º", category: "tecnologia", price: 79.99, image: "https://images.unsplash.com/photo-1557324232-b8917d3c3dcb?w=500&auto=format&fit=crop&q=60" },
     { id: 15, name: "Torneira de LED com Sensor de Temperatura", category: "casa", price: 32.50, image: "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=500&auto=format&fit=crop&q=60" },
     { id: 16, name: "Carregador sem Fios 3 em 1 Magnético Dobrável", category: "tecnologia", price: 49.99, image: "https://images.unsplash.com/photo-1622445275576-7243c7d13d8d?w=500&auto=format&fit=crop&q=60" },
