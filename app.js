@@ -1,4 +1,16 @@
-// Base de dados com 4 a 5 fotos oficiais/reais por produto de fornecedor
+// ==========================================
+// NOVA MARKET - APP.JS (VERSÃO COMPLETA E DEFINITIVA)
+// ==========================================
+
+// Base de dados de utilizadores e afiliados (sistema de comissão de 30%)
+let usersDatabase = [
+    { email: "admin@novamarket.com", nickname: "NOVA30", balance: 50.00 }
+];
+
+let currentUser = null;
+let activeAffiliateCode = "";
+
+// Catálogo com 4 a 5 fotos oficiais/reais por produto
 const products = [
     { 
         id: 34, name: "Cabo USB-C para USB-C Reforçado em Nylon 2m", category: "acessorios", price: 14.99, 
@@ -403,11 +415,6 @@ const products = [
 ];
 
 let cart = [];
-let currentUser = null;
-let usersDatabase = [
-    { email: "exemplo@email.com", nickname: "LOURDES30", balance: 15.00 }
-];
-
 const mainContainer = document.getElementById("mainContainer");
 const cartBtn = document.getElementById("cartBtn");
 const cartModal = document.getElementById("cartModal");
@@ -418,22 +425,137 @@ const cartTotalPrice = document.getElementById("cartTotalPrice");
 const searchInput = document.getElementById("searchInput");
 const checkoutBtn = document.getElementById("checkoutBtn");
 
+// ==========================================
+// FUNÇÕES DE UTILIDADE E AFILIADOS
+// ==========================================
 function getOriginalPrice(price) {
     return (price / 0.7).toFixed(2);
 }
 
+// Injetar a barra de afiliados e painel de embaixador no topo
+document.addEventListener("DOMContentLoaded", () => {
+    injectAffiliateHeader();
+    displayCatalog(products);
+});
+
+function injectAffiliateHeader() {
+    let header = document.querySelector("header") || document.body;
+    if (document.getElementById("globalAffiliateBar")) return;
+
+    let affiliateBar = document.createElement("div");
+    affiliateBar.id = "globalAffiliateBar";
+    affiliateBar.style.cssText = "background: #232f3e; color: white; padding: 10px 20px; display: flex; justify-content: space-between; align-items: center; font-size: 0.9rem; flex-wrap: wrap; gap: 10px; border-bottom: 2px solid #ffd814;";
+    
+    updateAffiliateBarHTML(affiliateBar);
+    header.insertBefore(affiliateBar, header.firstChild);
+}
+
+function updateAffiliateBarHTML(container) {
+    let userSection = "";
+    if (!currentUser) {
+        userSection = `
+            <div style="display: flex; align-items: center; gap: 8px;">
+                <span style="color: #ffd814; font-weight: bold;">👥 Área de Embaixador (30%):</span>
+                <button onclick="openLoginModal()" style="background: #ffd814; border: none; padding: 5px 12px; border-radius: 4px; cursor: pointer; font-weight: bold; font-size: 0.85rem;">Entrar / Criar Nick Code</button>
+            </div>
+        `;
+    } else {
+        userSection = `
+            <div style="display: flex; align-items: center; gap: 10px;">
+                <span>Olá, <strong>${currentUser.nickname}</strong> | Saldo: <strong style="color: #00ff88;">${currentUser.balance.toFixed(2)} €</strong></span>
+                <button onclick="openWalletModal()" style="background: #007600; color: white; border: none; padding: 4px 10px; border-radius: 4px; cursor: pointer; font-size: 0.8rem; font-weight: bold;">Sacar</button>
+                <button onclick="handleLogout()" style="background: transparent; color: #ff9999; border: none; cursor: pointer; font-size: 0.8rem;">Sair</button>
+            </div>
+        `;
+    }
+
+    container.innerHTML = `
+        ${userSection}
+        <div style="display: flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.1); padding: 5px 10px; border-radius: 6px;">
+            <label for="topAffiliateInput" style="font-size: 0.85rem; color: #ffd814; font-weight: bold;">🎁 Afiliado Code:</label>
+            <input type="text" id="topAffiliateInput" value="${activeAffiliateCode}" placeholder="Ex: LOURDES30" oninput="updateActiveAffiliateCode(this.value)" style="padding: 4px 8px; border-radius: 4px; border: 1px solid #ccc; text-transform: uppercase; width: 120px; font-weight: bold; font-size: 0.85rem; background: #fff; color: #000;">
+            <span id="affiliateStatusText" style="font-size: 0.75rem; font-weight: bold; color: ${activeAffiliateCode ? '#00ff88' : '#bbb'};">${activeAffiliateCode ? 'Ativo ✓' : 'Opcional'}</span>
+        </div>
+    `;
+}
+
+function updateActiveAffiliateCode(val) {
+    activeAffiliateCode = val.trim().toUpperCase();
+    let statusSpan = document.getElementById("affiliateStatusText");
+    if (statusSpan) {
+        statusSpan.style.color = activeAffiliateCode ? '#00ff88' : '#bbb';
+        statusSpan.innerText = activeAffiliateCode ? 'Ativo ✓' : 'Opcional';
+    }
+}
+
+function openLoginModal() {
+    let email = prompt("📧 Introduz o teu e-mail para criar ou iniciar sessão na conta de Afiliado:");
+    if (!email) return;
+    
+    let nickname = prompt("🔑 Escolhe o teu Nick Code único (ex: LOURDES30):");
+    if (!nickname) return;
+
+    nickname = nickname.trim().toUpperCase();
+    let existingUser = usersDatabase.find(u => u.nickname === nickname);
+    
+    if (!existingUser) {
+        existingUser = { email: email.trim(), nickname, balance: 0.00 };
+        usersDatabase.push(existingUser);
+        alert(`🎉 Conta de Afiliado criada com sucesso!\nO teu Nick Code é: ${nickname}\nSempre que alguém o usar nas compras, ganhas 30% de comissão!`);
+    } else {
+        alert(`👋 Bem-vindo de volta, ${nickname}! Sessão iniciada com sucesso.`);
+    }
+
+    currentUser = existingUser;
+    refreshAffiliateBar();
+}
+
+function openWalletModal() {
+    if (!currentUser) return;
+    let message = `📊 PAINEL DE AFILIADO\n\n` +
+                  `👤 Utilizador: ${currentUser.nickname}\n` +
+                  `📧 E-mail: ${currentUser.email}\n` +
+                  `💰 Saldo Disponível: ${currentUser.balance.toFixed(2)} €\n\n` +
+                  `Deseja solicitar o saque deste valor?`;
+                  
+    if (confirm(message)) {
+        if (currentUser.balance <= 0) {
+            alert("Ainda não tem saldo suficiente para saque.");
+            return;
+        }
+        alert(`✅ Pedido de saque de ${currentUser.balance.toFixed(2)} € efetuado com sucesso!`);
+        currentUser.balance = 0.00;
+        refreshAffiliateBar();
+    }
+}
+
+function handleLogout() {
+    currentUser = null;
+    alert("Sessão terminada com sucesso.");
+    refreshAffiliateBar();
+}
+
+function refreshAffiliateBar() {
+    let bar = document.getElementById("globalAffiliateBar");
+    if (bar) updateAffiliateBarHTML(bar);
+}
+
+// ==========================================
+// NAVEGAÇÃO, CATÁLOGO E DETALHES DO PRODUTO
+// ==========================================
 function goHome() {
     displayCatalog(products);
 }
 
 function displayCatalog(productsToDisplay) {
+    if (!mainContainer) return;
     let html = `
         <div style="margin-bottom: 1.5rem; display: flex; gap: 1rem; flex-wrap: wrap;">
-            <button class="cat-btn" onclick="filterCat('all')" style="padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer; border: 1px solid #ccc; background: white;">Todos</button>
-            <button class="cat-btn" onclick="filterCat('tecnologia')" style="padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer; border: 1px solid #ccc; background: white;">Tecnologia</button>
-            <button class="cat-btn" onclick="filterCat('casa')" style="padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer; border: 1px solid #ccc; background: white;">Casa & Cobre</button>
-            <button class="cat-btn" onclick="filterCat('acessorios')" style="padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer; border: 1px solid #ccc; background: white;">Acessórios</button>
-            <button class="cat-btn" onclick="filterCat('bem-estar')" style="padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer; border: 1px solid #ccc; background: white;">Bem-Estar</button>
+            <button class="cat-btn" onclick="filterCat('all')" style="padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer; border: 1px solid #ccc; background: white; font-weight: bold;">Todos</button>
+            <button class="cat-btn" onclick="filterCat('tecnologia')" style="padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer; border: 1px solid #ccc; background: white; font-weight: bold;">Tecnologia</button>
+            <button class="cat-btn" onclick="filterCat('casa')" style="padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer; border: 1px solid #ccc; background: white; font-weight: bold;">Casa & Cobre</button>
+            <button class="cat-btn" onclick="filterCat('acessorios')" style="padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer; border: 1px solid #ccc; background: white; font-weight: bold;">Acessórios</button>
+            <button class="cat-btn" onclick="filterCat('bem-estar')" style="padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer; border: 1px solid #ccc; background: white; font-weight: bold;">Bem-Estar</button>
         </div>
         <div class="products-grid">
     `;
@@ -444,8 +566,8 @@ function displayCatalog(productsToDisplay) {
         productsToDisplay.forEach(product => {
             const originalPrice = getOriginalPrice(product.price);
             html += `
-                <div class="product-card" onclick="openProductDetail(${product.id})">
-                    <img src="${product.images[0]}" alt="${product.name}">
+                <div class="product-card" onclick="openProductDetail(${product.id})" style="cursor: pointer;">
+                    <img src="${product.images[0]}" alt="${product.name}" onerror="this.src='https://m.media-amazon.com/images/I/61NYiP0jvWL._AC_SL1500_.jpg'">
                     <h3>${product.name}</h3>
                     <div class="price-box">
                         <span class="discount-badge">-30%</span>
@@ -472,20 +594,21 @@ function filterCat(cat) {
 
 function openProductDetail(productId) {
     const product = products.find(p => p.id === productId);
+    if (!product) return;
     const originalPrice = getOriginalPrice(product.price);
     const similarProducts = products.filter(p => p.category === product.category && p.id !== product.id).slice(0, 4);
 
     let thumbnailsHtml = '';
     product.images.forEach((img, index) => {
-        thumbnailsHtml += `<img src="${img}" class="thumbnail ${index === 0 ? 'active' : ''}" onclick="changeMainImage(this, '${img}')">`;
+        thumbnailsHtml += `<img src="${img}" class="thumbnail ${index === 0 ? 'active' : ''}" onclick="changeMainImage(this, '${img}')" onerror="this.src='https://m.media-amazon.com/images/I/61NYiP0jvWL._AC_SL1500_.jpg'">`;
     });
 
     let similarHtml = '';
     similarProducts.forEach(sim => {
         const simOriginal = getOriginalPrice(sim.price);
         similarHtml += `
-            <div class="product-card" onclick="openProductDetail(${sim.id})" style="min-width: 200px;">
-                <img src="${sim.images[0]}" alt="${sim.name}" style="height: 120px;">
+            <div class="product-card" onclick="openProductDetail(${sim.id})" style="min-width: 200px; cursor: pointer;">
+                <img src="${sim.images[0]}" alt="${sim.name}" style="height: 120px;" onerror="this.src='https://m.media-amazon.com/images/I/61NYiP0jvWL._AC_SL1500_.jpg'">
                 <h3 style="font-size: 0.85rem;">${sim.name}</h3>
                 <div class="price-box">
                     <span class="current-price" style="font-size: 1rem;">${sim.price.toFixed(2)} €</span>
@@ -499,14 +622,17 @@ function openProductDetail(productId) {
         <div class="product-detail-page">
             <button onclick="goHome()" style="background: none; border: none; color: #007185; cursor: pointer; margin-bottom: 1rem; font-weight: bold;"><i class="fa-solid fa-arrow-left"></i> Voltar aos resultados</button>
             <div class="detail-grid">
+                <!-- Galeria com 4 fotos oficiais -->
                 <div class="images-column">
                     <div class="main-img-container">
-                        <img id="mainImageDisplay" src="${product.images[0]}" alt="${product.name}">
+                        <img id="mainImageDisplay" src="${product.images[0]}" alt="${product.name}" onerror="this.src='https://m.media-amazon.com/images/I/61NYiP0jvWL._AC_SL1500_.jpg'">
                     </div>
                     <div class="thumbnails-row">
                         ${thumbnailsHtml}
                     </div>
                 </div>
+
+                <!-- Informações do Produto -->
                 <div class="info-column">
                     <h2>${product.name}</h2>
                     <div class="rating">
@@ -519,6 +645,8 @@ function openProductDetail(productId) {
                     </div>
                     <p style="color: #555; line-height: 1.6; margin-top: 1rem;">${product.description}</p>
                 </div>
+
+                <!-- Caixa de Compra -->
                 <div>
                     <div class="buy-box">
                         <div class="current-price" style="margin-bottom: 0.5rem;">${product.price.toFixed(2)} €</div>
@@ -527,6 +655,8 @@ function openProductDetail(productId) {
                     </div>
                 </div>
             </div>
+
+            <!-- Produtos Semelhantes -->
             <div class="similar-section">
                 <h3>Produtos semelhantes recomendados</h3>
                 <div style="display: flex; gap: 1rem; overflow-x: auto; padding-bottom: 1rem;">
@@ -544,6 +674,9 @@ function changeMainImage(element, imgUrl) {
     element.classList.add("active");
 }
 
+// ==========================================
+// GESTÃO DO CARRINHO E CHECKOUT COM COMISSÃO
+// ==========================================
 function addToCart(productId) {
     const product = products.find(p => p.id === productId);
     const cartItem = cart.find(item => item.id === productId);
@@ -554,10 +687,11 @@ function addToCart(productId) {
         cart.push({ ...product, quantity: 1 });
     }
     updateCart();
-    cartModal.style.display = "flex";
+    if (cartModal) cartModal.style.display = "flex";
 }
 
 function updateCart() {
+    if (!cartItemsContainer || !cartCount || !cartTotalPrice) return;
     cartItemsContainer.innerHTML = "";
     let totalItems = 0;
     let totalPrice = 0;
@@ -578,81 +712,8 @@ function updateCart() {
         cartItemsContainer.appendChild(cartItemDiv);
     });
 
-    // Adicionar secção do painel de embaixador / cupão ao fundo do modal do carrinho
-    let affiliateSectionContainer = document.getElementById("affiliateSectionContainer");
-    if (!affiliateSectionContainer) {
-        affiliateSectionContainer = document.createElement("div");
-        affiliateSectionContainer.id = "affiliateSectionContainer";
-        cartItemsContainer.parentNode.insertBefore(affiliateSectionContainer, cartTotalPrice.parentNode);
-    }
-    affiliateSectionContainer.innerHTML = renderAffiliatePanelHtml() + renderCouponInputHtml();
-
     cartCount.innerText = totalItems;
     cartTotalPrice.innerText = totalPrice.toFixed(2) + " €";
-}
-
-function renderAffiliatePanelHtml() {
-    if (!currentUser) {
-        return `
-            <div style="background: #f9f9f9; padding: 12px; border-radius: 8px; margin: 10px 0; border: 1px solid #ddd;">
-                <h4 style="font-size: 0.9rem; margin-bottom: 5px;">Área de Embaixador / Parceria</h4>
-                <p style="font-size: 0.75rem; color: #666; margin-bottom: 8px;">Faz login para criar o teu nick code e ganhar 30% de comissão!</p>
-                <input type="email" id="loginEmail" placeholder="O teu e-mail" style="width: 100%; padding: 6px; margin-bottom: 5px; border: 1px solid #ccc; border-radius: 4px; font-size: 0.8rem;">
-                <input type="text" id="loginNickname" placeholder="O teu Nick Code (ex: PROMO30)" style="width: 100%; padding: 6px; margin-bottom: 5px; border: 1px solid #ccc; border-radius: 4px; font-size: 0.8rem;">
-                <button onclick="handleLogin()" style="width: 100%; background: #ffd814; border: none; padding: 6px; border-radius: 4px; cursor: pointer; font-weight: bold; font-size: 0.8rem;">Entrar / Criar Conta</button>
-            </div>
-        `;
-    } else {
-        return `
-            <div style="background: #eef9f0; padding: 12px; border-radius: 8px; margin: 10px 0; border: 1px solid #b7e1cd;">
-                <h4 style="font-size: 0.9rem; margin-bottom: 3px;">Olá, ${currentUser.nickname}! 🚀</h4>
-                <p style="font-size: 0.75rem;">Saldo para Saque: <strong>${currentUser.balance.toFixed(2)} €</strong></p>
-                <button onclick="requestWithdrawal()" style="background: #007600; color: white; border: none; padding: 4px 8px; border-radius: 4px; cursor: pointer; margin-top: 5px; font-size: 0.75rem;">Pedir Saque</button>
-                <button onclick="handleLogout()" style="background: none; border: none; color: #cc0c39; cursor: pointer; margin-left: 10px; font-size: 0.75rem;">Sair</button>
-            </div>
-        `;
-    }
-}
-
-function renderCouponInputHtml() {
-    return `
-        <div style="margin: 10px 0;">
-            <input type="text" id="appliedCouponCode" placeholder="Tens um Nick Code de amigo?" style="width: 100%; padding: 6px; border: 1px solid #ccc; border-radius: 4px; font-size: 0.8rem;">
-        </div>
-    `;
-}
-
-function handleLogin() {
-    const email = document.getElementById("loginEmail").value.trim();
-    const nickname = document.getElementById("loginNickname").value.trim().toUpperCase();
-
-    if (!email || !nickname) {
-        alert("Por favor, preenche o e-mail e o nick code desejado.");
-        return;
-    }
-
-    let user = usersDatabase.find(u => u.nickname === nickname);
-    if (!user) {
-        user = { email, nickname, balance: 0.00 };
-        usersDatabase.push(user);
-    }
-    currentUser = user;
-    updateCart();
-}
-
-function handleLogout() {
-    currentUser = null;
-    updateCart();
-}
-
-function requestWithdrawal() {
-    if (currentUser.balance <= 0) {
-        alert("Não tens saldo suficiente para saque.");
-        return;
-    }
-    alert(`Pedido de saque no valor de ${currentUser.balance.toFixed(2)} € efetuado com sucesso para ${currentUser.email}!`);
-    currentUser.balance = 0;
-    updateCart();
 }
 
 function removeFromCart(productId) {
@@ -660,51 +721,61 @@ function removeFromCart(productId) {
     updateCart();
 }
 
-searchInput.addEventListener("input", (e) => {
-    const term = e.target.value.toLowerCase();
-    const filtered = products.filter(p => p.name.toLowerCase().includes(term));
-    displayCatalog(filtered);
-});
+// Eventos de Pesquisa e Carrinho
+if (searchInput) {
+    searchInput.addEventListener("input", (e) => {
+        const term = e.target.value.toLowerCase();
+        const filtered = products.filter(p => p.name.toLowerCase().includes(term));
+        displayCatalog(filtered);
+    });
+}
 
-cartBtn.addEventListener("click", () => {
-    cartModal.style.display = "flex";
-});
+if (cartBtn && cartModal) {
+    cartBtn.addEventListener("click", () => {
+        cartModal.style.display = "flex";
+    });
+}
 
-closeCart.addEventListener("click", () => {
-    cartModal.style.display = "none";
-});
+if (closeCart && cartModal) {
+    closeCart.addEventListener("click", () => {
+        cartModal.style.display = "none";
+    });
+}
 
 window.addEventListener("click", (e) => {
-    if (e.target === cartModal) {
+    if (cartModal && e.target === cartModal) {
         cartModal.style.display = "none";
     }
 });
 
-checkoutBtn.addEventListener("click", () => {
-    if (cart.length === 0) {
-        alert("O seu carrinho está vazio!");
-        return;
-    }
-
-    const couponInput = document.getElementById("appliedCouponCode");
-    const code = couponInput ? couponInput.value.trim().toUpperCase() : "";
-    let totalPrice = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-
-    if (code) {
-        let owner = usersDatabase.find(u => u.nickname === code);
-        if (owner) {
-            const commission = totalPrice * 0.30;
-            owner.balance += commission;
-            alert(`Cupão "${code}" aplicado! O embaixador ganhou ${commission.toFixed(2)} € de comissão.`);
-        } else {
-            alert("Cupão/Nick Code inválido. A compra prosseguirá sem código.");
+if (checkoutBtn) {
+    checkoutBtn.addEventListener("click", () => {
+        if (cart.length === 0) {
+            alert("O seu carrinho está vazio!");
+            return;
         }
-    }
 
-    alert("Compra simulada com sucesso! Obrigado pela preferência na Nova Market.");
-    cart = [];
-    updateCart();
-    cartModal.style.display = "none";
-});
+        let totalPrice = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
 
+        // Processar comissão se houver um Afiliado Code ativo na barra superior
+        if (activeAffiliateCode) {
+            let affiliateUser = usersDatabase.find(u => u.nickname === activeAffiliateCode);
+            if (affiliateUser) {
+                let commission = totalPrice * 0.30; // 30% de comissão
+                affiliateUser.balance += commission;
+                alert(`✨ Compra efetuada com sucesso!\nO código de afiliado "${activeAffiliateCode}" foi aplicado. O embaixador recebeu ${commission.toFixed(2)} € de comissão (30%).`);
+            } else {
+                alert("Compra efetuada com sucesso! (Nota: O código de afiliado inserido não foi encontrado na base de dados, por isso nenhuma comissão foi atribuída).");
+            }
+        } else {
+            alert("Compra simulada com sucesso! Obrigado pela preferência na Nova Market.");
+        }
+
+        cart = [];
+        updateCart();
+        if (cartModal) cartModal.style.display = "none";
+    });
+}
+
+// Arranque inicial do catálogo
 displayCatalog(products);
