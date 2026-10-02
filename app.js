@@ -1,11 +1,12 @@
 // Base de dados simulada de produtos
 const products = [
-    { id: 1, name: "Headphones Sem Fios", category: "tecnologia", price: 59.99, image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500&auto=format&fit=crop&q=60" },
-    { id: 2, name: "Smartwatch Desportivo", category: "tecnologia", price: 89.99, image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500&auto=format&fit=crop&q=60" },
-    { id: 3, name: "Ténis Urbanos", category: "moda", price: 45.00, image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500&auto=format&fit=crop&q=60" },
-    { id: 4, name: "Mochila Executiva", category: "acessorios", price: 39.99, image: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=500&auto=format&fit=crop&q=60" },
-    { id: 5, name: "Óculos de Sol Clássicos", category: "acessorios", price: 25.50, image: "https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=500&auto=format&fit=crop&q=60" },
-    { id: 6, name: "Camisola Casual de Malha", category: "moda", price: 34.00, image: "https://images.unsplash.com/photo-1434389677669-e08b4cac3105?w=500&auto=format&fit=crop&q=60" }
+    { id: 1, name: "Tomada Inteligente Wi-Fi", category: "tecnologia", price: 19.99, image: "https://images.unsplash.com/photo-1558089687-f282ffcbc126?w=500&auto=format&fit=crop&q=60" },
+    { id: 2, name: "Headphones Sem Fios", category: "tecnologia", price: 59.99, image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500&auto=format&fit=crop&q=60" },
+    { id: 3, name: "Smartwatch Desportivo", category: "tecnologia", price: 89.99, image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500&auto=format&fit=crop&q=60" },
+    { id: 4, name: "Ténis Urbanos", category: "moda", price: 45.00, image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500&auto=format&fit=crop&q=60" },
+    { id: 5, name: "Mochila Executiva", category: "acessorios", price: 39.99, image: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=500&auto=format&fit=crop&q=60" },
+    { id: 6, name: "Óculos de Sol Clássicos", category: "acessorios", price: 25.50, image: "https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=500&auto=format&fit=crop&q=60" },
+    { id: 7, name: "Camisola Casual de Malha", category: "moda", price: 34.00, image: "https://images.unsplash.com/photo-1434389677669-e08b4cac3105?w=500&auto=format&fit=crop&q=60" }
 ];
 
 let cart = [];
