@@ -403,6 +403,11 @@ const products = [
 ];
 
 let cart = [];
+let currentUser = null;
+let usersDatabase = [
+    { email: "exemplo@email.com", nickname: "LOURDES30", balance: 15.00 }
+];
+
 const mainContainer = document.getElementById("mainContainer");
 const cartBtn = document.getElementById("cartBtn");
 const cartModal = document.getElementById("cartModal");
@@ -413,7 +418,6 @@ const cartTotalPrice = document.getElementById("cartTotalPrice");
 const searchInput = document.getElementById("searchInput");
 const checkoutBtn = document.getElementById("checkoutBtn");
 
-// Função para calcular o preço original inflacionado (falso desconto de 30%)
 function getOriginalPrice(price) {
     return (price / 0.7).toFixed(2);
 }
@@ -495,7 +499,6 @@ function openProductDetail(productId) {
         <div class="product-detail-page">
             <button onclick="goHome()" style="background: none; border: none; color: #007185; cursor: pointer; margin-bottom: 1rem; font-weight: bold;"><i class="fa-solid fa-arrow-left"></i> Voltar aos resultados</button>
             <div class="detail-grid">
-                <!-- Coluna 1: Galeria com 4 fotos reais oficiais -->
                 <div class="images-column">
                     <div class="main-img-container">
                         <img id="mainImageDisplay" src="${product.images[0]}" alt="${product.name}">
@@ -504,8 +507,6 @@ function openProductDetail(productId) {
                         ${thumbnailsHtml}
                     </div>
                 </div>
-
-                <!-- Coluna 2: Informações -->
                 <div class="info-column">
                     <h2>${product.name}</h2>
                     <div class="rating">
@@ -518,8 +519,6 @@ function openProductDetail(productId) {
                     </div>
                     <p style="color: #555; line-height: 1.6; margin-top: 1rem;">${product.description}</p>
                 </div>
-
-                <!-- Coluna 3: Caixa de Compra -->
                 <div>
                     <div class="buy-box">
                         <div class="current-price" style="margin-bottom: 0.5rem;">${product.price.toFixed(2)} €</div>
@@ -528,8 +527,6 @@ function openProductDetail(productId) {
                     </div>
                 </div>
             </div>
-
-            <!-- Produtos Semelhantes -->
             <div class="similar-section">
                 <h3>Produtos semelhantes recomendados</h3>
                 <div style="display: flex; gap: 1rem; overflow-x: auto; padding-bottom: 1rem;">
@@ -581,8 +578,81 @@ function updateCart() {
         cartItemsContainer.appendChild(cartItemDiv);
     });
 
+    // Adicionar secção do painel de embaixador / cupão ao fundo do modal do carrinho
+    let affiliateSectionContainer = document.getElementById("affiliateSectionContainer");
+    if (!affiliateSectionContainer) {
+        affiliateSectionContainer = document.createElement("div");
+        affiliateSectionContainer.id = "affiliateSectionContainer";
+        cartItemsContainer.parentNode.insertBefore(affiliateSectionContainer, cartTotalPrice.parentNode);
+    }
+    affiliateSectionContainer.innerHTML = renderAffiliatePanelHtml() + renderCouponInputHtml();
+
     cartCount.innerText = totalItems;
     cartTotalPrice.innerText = totalPrice.toFixed(2) + " €";
+}
+
+function renderAffiliatePanelHtml() {
+    if (!currentUser) {
+        return `
+            <div style="background: #f9f9f9; padding: 12px; border-radius: 8px; margin: 10px 0; border: 1px solid #ddd;">
+                <h4 style="font-size: 0.9rem; margin-bottom: 5px;">Área de Embaixador / Parceria</h4>
+                <p style="font-size: 0.75rem; color: #666; margin-bottom: 8px;">Faz login para criar o teu nick code e ganhar 30% de comissão!</p>
+                <input type="email" id="loginEmail" placeholder="O teu e-mail" style="width: 100%; padding: 6px; margin-bottom: 5px; border: 1px solid #ccc; border-radius: 4px; font-size: 0.8rem;">
+                <input type="text" id="loginNickname" placeholder="O teu Nick Code (ex: PROMO30)" style="width: 100%; padding: 6px; margin-bottom: 5px; border: 1px solid #ccc; border-radius: 4px; font-size: 0.8rem;">
+                <button onclick="handleLogin()" style="width: 100%; background: #ffd814; border: none; padding: 6px; border-radius: 4px; cursor: pointer; font-weight: bold; font-size: 0.8rem;">Entrar / Criar Conta</button>
+            </div>
+        `;
+    } else {
+        return `
+            <div style="background: #eef9f0; padding: 12px; border-radius: 8px; margin: 10px 0; border: 1px solid #b7e1cd;">
+                <h4 style="font-size: 0.9rem; margin-bottom: 3px;">Olá, ${currentUser.nickname}! 🚀</h4>
+                <p style="font-size: 0.75rem;">Saldo para Saque: <strong>${currentUser.balance.toFixed(2)} €</strong></p>
+                <button onclick="requestWithdrawal()" style="background: #007600; color: white; border: none; padding: 4px 8px; border-radius: 4px; cursor: pointer; margin-top: 5px; font-size: 0.75rem;">Pedir Saque</button>
+                <button onclick="handleLogout()" style="background: none; border: none; color: #cc0c39; cursor: pointer; margin-left: 10px; font-size: 0.75rem;">Sair</button>
+            </div>
+        `;
+    }
+}
+
+function renderCouponInputHtml() {
+    return `
+        <div style="margin: 10px 0;">
+            <input type="text" id="appliedCouponCode" placeholder="Tens um Nick Code de amigo?" style="width: 100%; padding: 6px; border: 1px solid #ccc; border-radius: 4px; font-size: 0.8rem;">
+        </div>
+    `;
+}
+
+function handleLogin() {
+    const email = document.getElementById("loginEmail").value.trim();
+    const nickname = document.getElementById("loginNickname").value.trim().toUpperCase();
+
+    if (!email || !nickname) {
+        alert("Por favor, preenche o e-mail e o nick code desejado.");
+        return;
+    }
+
+    let user = usersDatabase.find(u => u.nickname === nickname);
+    if (!user) {
+        user = { email, nickname, balance: 0.00 };
+        usersDatabase.push(user);
+    }
+    currentUser = user;
+    updateCart();
+}
+
+function handleLogout() {
+    currentUser = null;
+    updateCart();
+}
+
+function requestWithdrawal() {
+    if (currentUser.balance <= 0) {
+        alert("Não tens saldo suficiente para saque.");
+        return;
+    }
+    alert(`Pedido de saque no valor de ${currentUser.balance.toFixed(2)} € efetuado com sucesso para ${currentUser.email}!`);
+    currentUser.balance = 0;
+    updateCart();
 }
 
 function removeFromCart(productId) {
@@ -590,7 +660,6 @@ function removeFromCart(productId) {
     updateCart();
 }
 
-searchInput.getElementById?.("input") // handled below via listener
 searchInput.addEventListener("input", (e) => {
     const term = e.target.value.toLowerCase();
     const filtered = products.filter(p => p.name.toLowerCase().includes(term));
@@ -616,6 +685,22 @@ checkoutBtn.addEventListener("click", () => {
         alert("O seu carrinho está vazio!");
         return;
     }
+
+    const couponInput = document.getElementById("appliedCouponCode");
+    const code = couponInput ? couponInput.value.trim().toUpperCase() : "";
+    let totalPrice = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+
+    if (code) {
+        let owner = usersDatabase.find(u => u.nickname === code);
+        if (owner) {
+            const commission = totalPrice * 0.30;
+            owner.balance += commission;
+            alert(`Cupão "${code}" aplicado! O embaixador ganhou ${commission.toFixed(2)} € de comissão.`);
+        } else {
+            alert("Cupão/Nick Code inválido. A compra prosseguirá sem código.");
+        }
+    }
+
     alert("Compra simulada com sucesso! Obrigado pela preferência na Nova Market.");
     cart = [];
     updateCart();
