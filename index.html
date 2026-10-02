@@ -26,15 +26,16 @@
     <!-- Secção de Destaque / Hero -->
     <section class="hero">
         <h2>Bem-vindo à Nova Market</h2>
-        <p>Encontre os melhores produtos aos melhores preços, com entrega rápida.</p>
+        <p>Os melhores gadgets e tendências de mercado com entrega rápida.</p>
     </section>
 
     <!-- Categorias -->
     <div class="categories">
         <button class="cat-btn active" data-category="all">Todos</button>
         <button class="cat-btn" data-category="tecnologia">Tecnologia</button>
-        <button class="cat-btn" data-category="moda">Moda</button>
+        <button class="cat-btn" data-category="casa">Casa & Cobre</button>
         <button class="cat-btn" data-category="acessorios">Acessórios</button>
+        <button class="cat-btn" data-category="bem-estar">Bem-Estar</button>
     </div>
 
     <!-- Lista de Produtos -->
@@ -44,14 +45,28 @@
         </div>
     </main>
 
+    <!-- Modal de Detalhes do Produto -->
+    <div class="product-modal" id="productModal">
+        <div class="product-modal-content">
+            <span class="close-btn" id="closeProductModal">&times;</span>
+            <div class="modal-grid">
+                <img id="modalProductImg" src="" alt="Produto">
+                <div class="modal-info">
+                    <h2 id="modalProductName"></h2>
+                    <p id="modalProductPrice" class="modal-price"></p>
+                    <p id="modalProductDesc" class="modal-desc"></p>
+                    <button class="add-to-cart" id="modalAddToCartBtn">Adicionar ao Carrinho</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Modal do Carrinho de Compras -->
     <div class="cart-modal" id="cartModal">
         <div class="cart-content">
             <span class="close-btn" id="closeCart">&times;</span>
             <h2>O seu Carrinho</h2>
-            <div id="cartItems" class="cart-items">
-                <!-- Itens do carrinho -->
-            </div>
+            <div id="cartItems" class="cart-items"></div>
             <div class="cart-total">
                 <p>Total: <span id="cartTotalPrice">0.00 €</span></p>
                 <button class="checkout-btn" id="checkoutBtn">Finalizar Compra</button>
