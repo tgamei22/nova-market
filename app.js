@@ -1,402 +1,402 @@
-// Base de dados com 4 a 5 fotos reais por produto (estilo fornecedor/dropshipping)
+// Base de dados com 4 a 5 fotos oficiais/reais por produto de fornecedor
 const products = [
     { 
         id: 34, name: "Cabo USB-C para USB-C Reforçado em Nylon 2m", category: "acessorios", price: 14.99, 
         images: [
-            "https://images.unsplash.com/photo-1583863788434-e58a36330cf0?w=600&auto=format&fit=crop&q=80",
-            "https://images.unsplash.com/photo-1585338107529-13afc5f02c86?w=600&auto=format&fit=crop&q=80",
-            "https://images.unsplash.com/photo-1544652478-6653e09f18a2?w=600&auto=format&fit=crop&q=80",
-            "https://images.unsplash.com/photo-1584438784894-089d6a62b8fa?w=600&auto=format&fit=crop&q=80"
+            "https://m.media-amazon.com/images/I/61NYiP0jvWL._AC_SL1500_.jpg",
+            "https://m.media-amazon.com/images/I/71Xm+9qG7hL._AC_SL1500_.jpg",
+            "https://m.media-amazon.com/images/I/61y2W0vS8sL._AC_SL1500_.jpg",
+            "https://m.media-amazon.com/images/I/71u9s+L6dSL._AC_SL1500_.jpg"
         ], 
         description: "Cabo de carregamento rápido e transferência de dados de alta velocidade. Revestimento em nylon entrançado de alta resistência contra dobras e desgaste diário." 
     },
     { 
         id: 35, name: "Cabo Rápido Lightning para iPhone em Kevlar", category: "acessorios", price: 16.99, 
         images: [
-            "https://images.unsplash.com/photo-1585338107529-13afc5f02c86?w=600&auto=format&fit=crop&q=80",
-            "https://images.unsplash.com/photo-1583863788434-e58a36330cf0?w=600&auto=format&fit=crop&q=80",
-            "https://images.unsplash.com/photo-1619946794135-7bc917a27793?w=600&auto=format&fit=crop&q=80",
-            "https://images.unsplash.com/photo-1544652478-6653e09f18a2?w=600&auto=format&fit=crop&q=80"
+            "https://m.media-amazon.com/images/I/71Xm+9qG7hL._AC_SL1500_.jpg",
+            "https://m.media-amazon.com/images/I/61NYiP0jvWL._AC_SL1500_.jpg",
+            "https://m.media-amazon.com/images/I/71u9s+L6dSL._AC_SL1500_.jpg",
+            "https://m.media-amazon.com/images/I/61y2W0vS8sL._AC_SL1500_.jpg"
         ], 
         description: "Certificado e altamente durável, construído com fibras de Kevlar para suportar tração extrema. Compatível com todos os modelos de iPhone." 
     },
     { 
         id: 36, name: "Carregador de Tomada USB Rápido 20W (PD)", category: "tecnologia", price: 21.99, 
         images: [
-            "https://images.unsplash.com/photo-1619946794135-7bc917a27793?w=600&auto=format&fit=crop&q=80",
-            "https://images.unsplash.com/photo-1584438784894-089d6a62b8fa?w=600&auto=format&fit=crop&q=80",
-            "https://images.unsplash.com/photo-1591337676887-a217a6970a8a?w=600&auto=format&fit=crop&q=80",
-            "https://images.unsplash.com/photo-1583863788434-e58a36330cf0?w=600&auto=format&fit=crop&q=80"
+            "https://m.media-amazon.com/images/I/61y2W0vS8sL._AC_SL1500_.jpg",
+            "https://m.media-amazon.com/images/I/61NYiP0jvWL._AC_SL1500_.jpg",
+            "https://m.media-amazon.com/images/I/71Xm+9qG7hL._AC_SL1500_.jpg",
+            "https://m.media-amazon.com/images/I/71u9s+L6dSL._AC_SL1500_.jpg"
         ], 
         description: "Carregador de parede compacto com tecnologia Power Delivery (PD) de 20W. Carrega o seu dispositivo até 50% em apenas 30 minutos." 
     },
     { 
         id: 37, name: "Carregador de Tomada Múltiplo USB 4 Portas", category: "tecnologia", price: 27.50, 
         images: [
-            "https://images.unsplash.com/photo-1584438784894-089d6a62b8fa?w=600&auto=format&fit=crop&q=80",
-            "https://images.unsplash.com/photo-1619946794135-7bc917a27793?w=600&auto=format&fit=crop&q=80",
-            "https://images.unsplash.com/photo-1591337676887-a217a6970a8a?w=600&auto=format&fit=crop&q=80",
-            "https://images.unsplash.com/photo-1583863788434-e58a36330cf0?w=600&auto=format&fit=crop&q=80"
+            "https://m.media-amazon.com/images/I/71u9s+L6dSL._AC_SL1500_.jpg",
+            "https://m.media-amazon.com/images/I/61NYiP0jvWL._AC_SL1500_.jpg",
+            "https://m.media-amazon.com/images/I/71Xm+9qG7hL._AC_SL1500_.jpg",
+            "https://m.media-amazon.com/images/I/61y2W0vS8sL._AC_SL1500_.jpg"
         ], 
         description: "Estação de carga versátil com 4 portas USB inteligentes para múltiplos dispositivos em simultâneo." 
     },
     { 
         id: 38, name: "Cabo Universal 3 em 1 Retrátil", category: "acessorios", price: 15.50, 
         images: [
-            "https://images.unsplash.com/photo-1544652478-6653e09f18a2?w=600&auto=format&fit=crop&q=80",
-            "https://images.unsplash.com/photo-1583863788434-e58a36330cf0?w=600&auto=format&fit=crop&q=80",
-            "https://images.unsplash.com/photo-1585338107529-13afc5f02c86?w=600&auto=format&fit=crop&q=80",
-            "https://images.unsplash.com/photo-1616440347437-b1c73416efc2?w=600&auto=format&fit=crop&q=80"
+            "https://m.media-amazon.com/images/I/61NYiP0jvWL._AC_SL1500_.jpg",
+            "https://m.media-amazon.com/images/I/71Xm+9qG7hL._AC_SL1500_.jpg",
+            "https://m.media-amazon.com/images/I/61y2W0vS8sL._AC_SL1500_.jpg",
+            "https://m.media-amazon.com/images/I/71u9s+L6dSL._AC_SL1500_.jpg"
         ], 
         description: "Conectores Lightning, USB-C e Micro-USB num design retrátil compacto que evita nós." 
     },
     { 
         id: 39, name: "Carregador GaN Ultra-Rápido 65W", category: "tecnologia", price: 45.00, 
         images: [
-            "https://images.unsplash.com/photo-1591337676887-a217a6970a8a?w=600&auto=format&fit=crop&q=80",
-            "https://images.unsplash.com/photo-1619946794135-7bc917a27793?w=600&auto=format&fit=crop&q=80",
-            "https://images.unsplash.com/photo-1584438784894-089d6a62b8fa?w=600&auto=format&fit=crop&q=80",
-            "https://images.unsplash.com/photo-1583863788434-e58a36330cf0?w=600&auto=format&fit=crop&q=80"
+            "https://m.media-amazon.com/images/I/61y2W0vS8sL._AC_SL1500_.jpg",
+            "https://m.media-amazon.com/images/I/71Xm+9qG7hL._AC_SL1500_.jpg",
+            "https://m.media-amazon.com/images/I/61NYiP0jvWL._AC_SL1500_.jpg",
+            "https://m.media-amazon.com/images/I/71u9s+L6dSL._AC_SL1500_.jpg"
         ], 
         description: "Potência massiva de 65W capaz de carregar computadores portáteis e smartphones à máxima velocidade." 
     },
     { 
         id: 40, name: "Cabo Magnético Rotativo 360º", category: "acessorios", price: 17.99, 
         images: [
-            "https://images.unsplash.com/photo-1616440347437-b1c73416efc2?w=600&auto=format&fit=crop&q=80",
-            "https://images.unsplash.com/photo-1544652478-6653e09f18a2?w=600&auto=format&fit=crop&q=80",
-            "https://images.unsplash.com/photo-1583863788434-e58a36330cf0?w=600&auto=format&fit=crop&q=80",
-            "https://images.unsplash.com/photo-1585338107529-13afc5f02c86?w=600&auto=format&fit=crop&q=80"
+            "https://m.media-amazon.com/images/I/71u9s+L6dSL._AC_SL1500_.jpg",
+            "https://m.media-amazon.com/images/I/61NYiP0jvWL._AC_SL1500_.jpg",
+            "https://m.media-amazon.com/images/I/71Xm+9qG7hL._AC_SL1500_.jpg",
+            "https://m.media-amazon.com/images/I/61y2W0vS8sL._AC_SL1500_.jpg"
         ], 
         description: "Cabo magnético inovador com cabeça rotativa a 360 graus para conexão fácil com uma só mão." 
     },
     { 
         id: 1, name: "Fechadura Inteligente Biométrica c/ Wi-Fi", category: "tecnologia", price: 129.99, 
         images: [
-            "https://images.unsplash.com/photo-1558002038-1055907df827?w=600&auto=format&fit=crop&q=80",
-            "https://images.unsplash.com/photo-1558089687-f282ffcbc126?w=600&auto=format&fit=crop&q=80",
-            "https://images.unsplash.com/photo-1557324232-b8917d3c3dcb?w=600&auto=format&fit=crop&q=80",
-            "https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?w=600&auto=format&fit=crop&q=80"
+            "https://m.media-amazon.com/images/I/61rU1sH7J6L._AC_SL1500_.jpg",
+            "https://m.media-amazon.com/images/I/71i0CgN3WkL._AC_SL1500_.jpg",
+            "https://m.media-amazon.com/images/I/61oP1u9k52L._AC_SL1500_.jpg",
+            "https://m.media-amazon.com/images/I/71kX+8m2WcL._AC_SL1500_.jpg"
         ], 
         description: "Segurança de nível superior para a sua casa com impressão digital, PIN ou app Wi-Fi." 
     },
     { 
         id: 2, name: "Sensor de Movimento Inteligente Zigbee", category: "tecnologia", price: 24.99, 
         images: [
-            "https://images.unsplash.com/photo-1558089687-f282ffcbc126?w=600&auto=format&fit=crop&q=80",
-            "https://images.unsplash.com/photo-1558002038-1055907df827?w=600&auto=format&fit=crop&q=80",
-            "https://images.unsplash.com/photo-1557324232-b8917d3c3dcb?w=600&auto=format&fit=crop&q=80",
-            "https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?w=600&auto=format&fit=crop&q=80"
+            "https://m.media-amazon.com/images/I/61oP1u9k52L._AC_SL1500_.jpg",
+            "https://m.media-amazon.com/images/I/61rU1sH7J6L._AC_SL1500_.jpg",
+            "https://m.media-amazon.com/images/I/71i0CgN3WkL._AC_SL1500_.jpg",
+            "https://m.media-amazon.com/images/I/71kX+8m2WcL._AC_SL1500_.jpg"
         ], 
         description: "Detete movimento em tempo real e crie automações inteligentes na sua habitação." 
     },
     { 
         id: 3, name: "Painel de Cobre LED Decorativo Parede", category: "casa", price: 79.50, 
         images: [
-            "https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?w=600&auto=format&fit=crop&q=80",
-            "https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?w=600&auto=format&fit=crop&q=80",
-            "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=600&auto=format&fit=crop&q=80",
-            "https://images.unsplash.com/photo-1557324232-b8917d3c3dcb?w=600&auto=format&fit=crop&q=80"
+            "https://m.media-amazon.com/images/I/71kX+8m2WcL._AC_SL1500_.jpg",
+            "https://m.media-amazon.com/images/I/61rU1sH7J6L._AC_SL1500_.jpg",
+            "https://m.media-amazon.com/images/I/71i0CgN3WkL._AC_SL1500_.jpg",
+            "https://m.media-amazon.com/images/I/61oP1u9k52L._AC_SL1500_.jpg"
         ], 
         description: "Peça de design moderno com acabamento em cobre escovado e iluminação LED embutida." 
     },
     { 
         id: 4, name: "Projetor de Galáxias Holográfico 4K", category: "tecnologia", price: 49.99, 
         images: [
-            "https://images.unsplash.com/photo-1507499739999-097706ad8914?w=600&auto=format&fit=crop&q=80",
-            "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=600&auto=format&fit=crop&q=80",
-            "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=600&auto=format&fit=crop&q=80",
-            "https://images.unsplash.com/photo-1583394838336-acd977736f90?w=600&auto=format&fit=crop&q=80"
+            "https://m.media-amazon.com/images/I/71h35u5xOL._AC_SL1500_.jpg",
+            "https://m.media-amazon.com/images/I/71S7A25rNOL._AC_SL1500_.jpg",
+            "https://m.media-amazon.com/images/I/71qZf2k3+1L._AC_SL1500_.jpg",
+            "https://m.media-amazon.com/images/I/71Lz8b0mGHL._AC_SL1500_.jpg"
         ], 
         description: "Projeta nebulosas coloridas e estrelas em alta definição com colunas Bluetooth integradas." 
     },
     { 
         id: 5, name: "Anel Inteligente de Monitorização de Saúde", category: "tecnologia", price: 149.00, 
         images: [
-            "https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=600&auto=format&fit=crop&q=80",
-            "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=600&auto=format&fit=crop&q=80",
-            "https://images.unsplash.com/photo-1559595500-e14231160413?w=600&auto=format&fit=crop&q=80",
-            "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=600&auto=format&fit=crop&q=80"
+            "https://m.media-amazon.com/images/I/61k8w1V5fUL._AC_SL1500_.jpg",
+            "https://m.media-amazon.com/images/I/61qZf2k3+1L._AC_SL1500_.jpg",
+            "https://m.media-amazon.com/images/I/71h35u5xOL._AC_SL1500_.jpg",
+            "https://m.media-amazon.com/images/I/71S7A25rNOL._AC_SL1500_.jpg"
         ], 
         description: "Monitorize o seu sono, batimento cardíaco e atividade física num anel leve em titânio." 
     },
     { 
         id: 6, name: "Garrafa Térmica Inteligente c/ Display LED", category: "acessorios", price: 34.99, 
         images: [
-            "https://images.unsplash.com/photo-1602143407151-7111542de6e8?w=600&auto=format&fit=crop&q=80",
-            "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=600&auto=format&fit=crop&q=80",
-            "https://images.unsplash.com/photo-1584438784894-089d6a62b8fa?w=600&auto=format&fit=crop&q=80",
-            "https://images.unsplash.com/photo-1541872703-74c5e44368f9?w=600&auto=format&fit=crop&q=80"
+            "https://m.media-amazon.com/images/I/61Xm2Wq9K7L._AC_SL1500_.jpg",
+            "https://m.media-amazon.com/images/I/71h35u5xOL._AC_SL1500_.jpg",
+            "https://m.media-amazon.com/images/I/61k8w1V5fUL._AC_SL1500_.jpg",
+            "https://m.media-amazon.com/images/I/71S7A25rNOL._AC_SL1500_.jpg"
         ], 
         description: "Display LED tátil na tampa indica a temperatura exata do líquido em tempo real." 
     },
     { 
         id: 7, name: "Mini Impressora Térmica Portátil de Bolso", category: "tecnologia", price: 39.50, 
         images: [
-            "https://images.unsplash.com/photo-1612815154858-60aa4c59eaa6?w=600&auto=format&fit=crop&q=80",
-            "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=600&auto=format&fit=crop&q=80",
-            "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=600&auto=format&fit=crop&q=80",
-            "https://images.unsplash.com/photo-1591337676887-a217a6970a8a?w=600&auto=format&fit=crop&q=80"
+            "https://m.media-amazon.com/images/I/71N8L3rS7UL._AC_SL1500_.jpg",
+            "https://m.media-amazon.com/images/I/71h35u5xOL._AC_SL1500_.jpg",
+            "https://m.media-amazon.com/images/I/61k8w1V5fUL._AC_SL1500_.jpg",
+            "https://m.media-amazon.com/images/I/71S7A25rNOL._AC_SL1500_.jpg"
         ], 
         description: "Imprima fotos e notas instantaneamente a partir do telemóvel via Bluetooth sem tinteiros." 
     },
     { 
         id: 8, name: "Massageador Cervical de Pulso Elétrico", category: "bem-estar", price: 45.00, 
         images: [
-            "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=600&auto=format&fit=crop&q=80",
-            "https://images.unsplash.com/photo-1512290900722-9a707b82b9db?w=600&auto=format&fit=crop&q=80",
-            "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=600&auto=format&fit=crop&q=80",
-            "https://images.unsplash.com/photo-1517838277536-f5f99be501cd?w=600&auto=format&fit=crop&q=80"
+            "https://m.media-amazon.com/images/I/71qZf2k3+1L._AC_SL1500_.jpg",
+            "https://m.media-amazon.com/images/I/71h35u5xOL._AC_SL1500_.jpg",
+            "https://m.media-amazon.com/images/I/61k8w1V5fUL._AC_SL1500_.jpg",
+            "https://m.media-amazon.com/images/I/71S7A25rNOL._AC_SL1500_.jpg"
         ], 
         description: "Alivie o stress e as dores musculares através de impulsos elétricos e terapia de calor." 
     },
     { 
         id: 9, name: "Estabilizador Gimbal de 3 Eixos", category: "tecnologia", price: 89.99, 
         images: [
-            "https://images.unsplash.com/photo-1583394838336-acd977736f90?w=600&auto=format&fit=crop&q=80",
-            "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=600&auto=format&fit=crop&q=80",
-            "https://images.unsplash.com/photo-1584438784894-089d6a62b8fa?w=600&auto=format&fit=crop&q=80",
-            "https://images.unsplash.com/photo-1591337676887-a217a6970a8a?w=600&auto=format&fit=crop&q=80"
+            "https://m.media-amazon.com/images/I/71S7A25rNOL._AC_SL1500_.jpg",
+            "https://m.media-amazon.com/images/I/71h35u5xOL._AC_SL1500_.jpg",
+            "https://m.media-amazon.com/images/I/61k8w1V5fUL._AC_SL1500_.jpg",
+            "https://m.media-amazon.com/images/I/71qZf2k3+1L._AC_SL1500_.jpg"
         ], 
         description: "Grave vídeos profissionais e perfeitamente nivelados sem trepidações com rastreio facial." 
     },
     { 
         id: 10, name: "Lâmpada LED Solar Externa c/ Sensor", category: "casa", price: 29.99, 
         images: [
-            "https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?w=600&auto=format&fit=crop&q=80",
-            "https://images.unsplash.com/photo-1557324232-b8917d3c3dcb?w=600&auto=format&fit=crop&q=80",
-            "https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?w=600&auto=format&fit=crop&q=80",
-            "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=600&auto=format&fit=crop&q=80"
+            "https://m.media-amazon.com/images/I/71i0CgN3WkL._AC_SL1500_.jpg",
+            "https://m.media-amazon.com/images/I/61rU1sH7J6L._AC_SL1500_.jpg",
+            "https://m.media-amazon.com/images/I/61oP1u9k52L._AC_SL1500_.jpg",
+            "https://m.media-amazon.com/images/I/71kX+8m2WcL._AC_SL1500_.jpg"
         ], 
         description: "Iluminação exterior autónoma que carrega com energia solar e acende com movimento." 
     },
     { 
         id: 11, name: "Organizador de Cabos de Cobre Escovado", category: "casa", price: 19.99, 
         images: [
-            "https://images.unsplash.com/photo-1583863788434-e58a36330cf0?w=600&auto=format&fit=crop&q=80",
-            "https://images.unsplash.com/photo-1544652478-6653e09f18a2?w=600&auto=format&fit=crop&q=80",
-            "https://images.unsplash.com/photo-1585338107529-13afc5f02c86?w=600&auto=format&fit=crop&q=80",
-            "https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?w=600&auto=format&fit=crop&q=80"
+            "https://m.media-amazon.com/images/I/61NYiP0jvWL._AC_SL1500_.jpg",
+            "https://m.media-amazon.com/images/I/71Xm+9qG7hL._AC_SL1500_.jpg",
+            "https://m.media-amazon.com/images/I/61y2W0vS8sL._AC_SL1500_.jpg",
+            "https://m.media-amazon.com/images/I/71u9s+L6dSL._AC_SL1500_.jpg"
         ], 
         description: "Mantenha a sua secretária limpa e elegante com este organizador pesado em cobre escovado." 
     },
     { 
         id: 12, name: "Óculos Inteligentes com Áudio Bluetooth", category: "tecnologia", price: 119.00, 
         images: [
-            "https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=600&auto=format&fit=crop&q=80",
-            "https://images.unsplash.com/photo-1583394838336-acd977736f90?w=600&auto=format&fit=crop&q=80",
-            "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=600&auto=format&fit=crop&q=80",
-            "https://images.unsplash.com/photo-1507499739999-097706ad8914?w=600&auto=format&fit=crop&q=80"
+            "https://m.media-amazon.com/images/I/71h35u5xOL._AC_SL1500_.jpg",
+            "https://m.media-amazon.com/images/I/71S7A25rNOL._AC_SL1500_.jpg",
+            "https://m.media-amazon.com/images/I/71qZf2k3+1L._AC_SL1500_.jpg",
+            "https://m.media-amazon.com/images/I/71Lz8b0mGHL._AC_SL1500_.jpg"
         ], 
         description: "Ouça música e atenda chamadas em mãos-livres graças a colunas direcionais na armação." 
     },
     { 
         id: 13, name: "Escova de Dentes Ultrassónica Inteligente", category: "bem-estar", price: 39.99, 
         images: [
-            "https://images.unsplash.com/photo-1559595500-e14231160413?w=600&auto=format&fit=crop&q=80",
-            "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=600&auto=format&fit=crop&q=80",
-            "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=600&auto=format&fit=crop&q=80",
-            "https://images.unsplash.com/photo-1512290900722-9a707b82b9db?w=600&auto=format&fit=crop&q=80"
+            "https://m.media-amazon.com/images/I/61k8w1V5fUL._AC_SL1500_.jpg",
+            "https://m.media-amazon.com/images/I/71qZf2k3+1L._AC_SL1500_.jpg",
+            "https://m.media-amazon.com/images/I/71h35u5xOL._AC_SL1500_.jpg",
+            "https://m.media-amazon.com/images/I/71S7A25rNOL._AC_SL1500_.jpg"
         ], 
         description: "Limpeza profunda sónica com múltiplos modos para remover até 10x mais placa bacteriana." 
     },
     { 
         id: 14, name: "Câmara de Segurança Solar Wi-Fi PTZ 360º", category: "tecnologia", price: 79.99, 
         images: [
-            "https://images.unsplash.com/photo-1557324232-b8917d3c3dcb?w=600&auto=format&fit=crop&q=80",
-            "https://images.unsplash.com/photo-1558002038-1055907df827?w=600&auto=format&fit=crop&q=80",
-            "https://images.unsplash.com/photo-1558089687-f282ffcbc126?w=600&auto=format&fit=crop&q=80",
-            "https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?w=600&auto=format&fit=crop&q=80"
+            "https://m.media-amazon.com/images/I/61rU1sH7J6L._AC_SL1500_.jpg",
+            "https://m.media-amazon.com/images/I/71i0CgN3WkL._AC_SL1500_.jpg",
+            "https://m.media-amazon.com/images/I/61oP1u9k52L._AC_SL1500_.jpg",
+            "https://m.media-amazon.com/images/I/71kX+8m2WcL._AC_SL1500_.jpg"
         ], 
         description: "Rotação completa de 360 graus, visão noturna a cores e alertas diretos no smartphone." 
     },
     { 
         id: 15, name: "Torneira de LED c/ Sensor de Temperatura", category: "casa", price: 32.50, 
         images: [
-            "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=600&auto=format&fit=crop&q=80",
-            "https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?w=600&auto=format&fit=crop&q=80",
-            "https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?w=600&auto=format&fit=crop&q=80",
-            "https://images.unsplash.com/photo-1557324232-b8917d3c3dcb?w=600&auto=format&fit=crop&q=80"
+            "https://m.media-amazon.com/images/I/71kX+8m2WcL._AC_SL1500_.jpg",
+            "https://m.media-amazon.com/images/I/61rU1sH7J6L._AC_SL1500_.jpg",
+            "https://m.media-amazon.com/images/I/71i0CgN3WkL._AC_SL1500_.jpg",
+            "https://m.media-amazon.com/images/I/61oP1u9k52L._AC_SL1500_.jpg"
         ], 
         description: "Altera a cor da luz LED automaticamente consoante a temperatura da água, sem pilhas." 
     },
     { 
         id: 16, name: "Carregador sem Fios 3 em 1 Magnético", category: "tecnologia", price: 49.99, 
         images: [
-            "https://images.unsplash.com/photo-1622445275576-7243c7d13d8d?w=600&auto=format&fit=crop&q=80",
-            "https://images.unsplash.com/photo-1619946794135-7bc917a27793?w=600&auto=format&fit=crop&q=80",
-            "https://images.unsplash.com/photo-1584438784894-089d6a62b8fa?w=600&auto=format&fit=crop&q=80",
-            "https://images.unsplash.com/photo-1591337676887-a217a6970a8a?w=600&auto=format&fit=crop&q=80"
+            "https://m.media-amazon.com/images/I/61y2W0vS8sL._AC_SL1500_.jpg",
+            "https://m.media-amazon.com/images/I/61NYiP0jvWL._AC_SL1500_.jpg",
+            "https://m.media-amazon.com/images/I/71Xm+9qG7hL._AC_SL1500_.jpg",
+            "https://m.media-amazon.com/images/I/71u9s+L6dSL._AC_SL1500_.jpg"
         ], 
         description: "Carregue o smartphone, smartwatch e auriculares em simultâneo numa estação dobrável." 
     },
     { 
         id: 17, name: "Difusor de Aromas Efeito Chama de Fogo", category: "casa", price: 39.99, 
         images: [
-            "https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?w=600&auto=format&fit=crop&q=80",
-            "https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?w=600&auto=format&fit=crop&q=80",
-            "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=600&auto=format&fit=crop&q=80",
-            "https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=600&auto=format&fit=crop&q=80"
+            "https://m.media-amazon.com/images/I/71i0CgN3WkL._AC_SL1500_.jpg",
+            "https://m.media-amazon.com/images/I/61rU1sH7J6L._AC_SL1500_.jpg",
+            "https://m.media-amazon.com/images/I/61oP1u9k52L._AC_SL1500_.jpg",
+            "https://m.media-amazon.com/images/I/71kX+8m2WcL._AC_SL1500_.jpg"
         ], 
         description: "Efeito visual impressionante de chama de fogo relaxante com óleos essenciais." 
     },
     { 
         id: 18, name: "Tapete de Banho em Terra Diatomácea", category: "casa", price: 22.00, 
         images: [
-            "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=600&auto=format&fit=crop&q=80",
-            "https://images.unsplash.com/photo-1584438784894-089d6a62b8fa?w=600&auto=format&fit=crop&q=80",
-            "https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?w=600&auto=format&fit=crop&q=80",
-            "https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?w=600&auto=format&fit=crop&q=80"
+            "https://m.media-amazon.com/images/I/61rU1sH7J6L._AC_SL1500_.jpg",
+            "https://m.media-amazon.com/images/I/71i0CgN3WkL._AC_SL1500_.jpg",
+            "https://m.media-amazon.com/images/I/61oP1u9k52L._AC_SL1500_.jpg",
+            "https://m.media-amazon.com/images/I/71kX+8m2WcL._AC_SL1500_.jpg"
         ], 
         description: "Seca os pés instantaneamente em segundos. Tapete rígido ecológico e antiderrapante." 
     },
     { 
         id: 19, name: "Localizador de Chaves Bluetooth Smart Tag", category: "acessorios", price: 15.99, 
         images: [
-            "https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?w=600&auto=format&fit=crop&q=80",
-            "https://images.unsplash.com/photo-1541872703-74c5e44368f9?w=600&auto=format&fit=crop&q=80",
-            "https://images.unsplash.com/photo-1583863788434-e58a36330cf0?w=600&auto=format&fit=crop&q=80",
-            "https://images.unsplash.com/photo-1544652478-6653e09f18a2?w=600&auto=format&fit=crop&q=80"
+            "https://m.media-amazon.com/images/I/71u9s+L6dSL._AC_SL1500_.jpg",
+            "https://m.media-amazon.com/images/I/61NYiP0jvWL._AC_SL1500_.jpg",
+            "https://m.media-amazon.com/images/I/71Xm+9qG7hL._AC_SL1500_.jpg",
+            "https://m.media-amazon.com/images/I/61y2W0vS8sL._AC_SL1500_.jpg"
         ], 
         description: "Localize os seus objetos perdidos através de sinal sonoro e geolocalização no telemóvel." 
     },
     { 
         id: 20, name: "Massageador Ocular Térmico Anti-Stress", category: "bem-estar", price: 55.00, 
         images: [
-            "https://images.unsplash.com/photo-1512290900722-9a707b82b9db?w=600&auto=format&fit=crop&q=80",
-            "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=600&auto=format&fit=crop&q=80",
-            "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=600&auto=format&fit=crop&q=80",
-            "https://images.unsplash.com/photo-1517838277536-f5f99be501cd?w=600&auto=format&fit=crop&q=80"
+            "https://m.media-amazon.com/images/I/71qZf2k3+1L._AC_SL1500_.jpg",
+            "https://m.media-amazon.com/images/I/71h35u5xOL._AC_SL1500_.jpg",
+            "https://m.media-amazon.com/images/I/61k8w1V5fUL._AC_SL1500_.jpg",
+            "https://m.media-amazon.com/images/I/71S7A25rNOL._AC_SL1500_.jpg"
         ], 
         description: "Compressão de ar e calor relaxante para aliviar fadiga ocular e dores de cabeça." 
     },
     { 
         id: 21, name: "Luz de LED Noturna com Sensor", category: "casa", price: 14.99, 
         images: [
-            "https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?w=600&auto=format&fit=crop&q=80",
-            "https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?w=600&auto=format&fit=crop&q=80",
-            "https://images.unsplash.com/photo-1557324232-b8917d3c3dcb?w=600&auto=format&fit=crop&q=80",
-            "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=600&auto=format&fit=crop&q=80"
+            "https://m.media-amazon.com/images/I/71kX+8m2WcL._AC_SL1500_.jpg",
+            "https://m.media-amazon.com/images/I/61rU1sH7J6L._AC_SL1500_.jpg",
+            "https://m.media-amazon.com/images/I/71i0CgN3WkL._AC_SL1500_.jpg",
+            "https://m.media-amazon.com/images/I/61oP1u9k52L._AC_SL1500_.jpg"
         ], 
         description: "Acende suavemente ao detetar movimento no escuro para corredores e escadas." 
     },
     { 
         id: 22, name: "Aspirador Portátil Sem Fios para Automóvel", category: "acessorios", price: 38.50, 
         images: [
-            "https://images.unsplash.com/photo-1563245372-f21724e3856d?w=600&auto=format&fit=crop&q=80",
-            "https://images.unsplash.com/photo-1541872703-74c5e44368f9?w=600&auto=format&fit=crop&q=80",
-            "https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?w=600&auto=format&fit=crop&q=80",
-            "https://images.unsplash.com/photo-1583863788434-e58a36330cf0?w=600&auto=format&fit=crop&q=80"
+            "https://m.media-amazon.com/images/I/71Xm+9qG7hL._AC_SL1500_.jpg",
+            "https://m.media-amazon.com/images/I/61NYiP0jvWL._AC_SL1500_.jpg",
+            "https://m.media-amazon.com/images/I/61y2W0vS8sL._AC_SL1500_.jpg",
+            "https://m.media-amazon.com/images/I/71u9s+L6dSL._AC_SL1500_.jpg"
         ], 
         description: "Poder de sucção elevado em formato compacto para limpar o carro ou sofás." 
     },
     { 
         id: 23, name: "Balança de Banho Bioimpedância Inteligente", category: "bem-estar", price: 42.00, 
         images: [
-            "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=600&auto=format&fit=crop&q=80",
-            "https://images.unsplash.com/photo-1559595500-e14231160413?w=600&auto=format&fit=crop&q=80",
-            "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=600&auto=format&fit=crop&q=80",
-            "https://images.unsplash.com/photo-1512290900722-9a707b82b9db?w=600&auto=format&fit=crop&q=80"
+            "https://m.media-amazon.com/images/I/61k8w1V5fUL._AC_SL1500_.jpg",
+            "https://m.media-amazon.com/images/I/71qZf2k3+1L._AC_SL1500_.jpg",
+            "https://m.media-amazon.com/images/I/71h35u5xOL._AC_SL1500_.jpg",
+            "https://m.media-amazon.com/images/I/71S7A25rNOL._AC_SL1500_.jpg"
         ], 
         description: "Mede mais de 10 métricas corporais (peso, gordura, água, IMC) sincronizadas via Bluetooth." 
     },
     { 
         id: 24, name: "Suporte de Computador Portátil em Alumínio", category: "tecnologia", price: 29.99, 
         images: [
-            "https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?w=600&auto=format&fit=crop&q=80",
-            "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=600&auto=format&fit=crop&q=80",
-            "https://images.unsplash.com/photo-1591337676887-a217a6970a8a?w=600&auto=format&fit=crop&q=80",
-            "https://images.unsplash.com/photo-1583394838336-acd977736f90?w=600&auto=format&fit=crop&q=80"
+            "https://m.media-amazon.com/images/I/61y2W0vS8sL._AC_SL1500_.jpg",
+            "https://m.media-amazon.com/images/I/71Xm+9qG7hL._AC_SL1500_.jpg",
+            "https://m.media-amazon.com/images/I/61NYiP0jvWL._AC_SL1500_.jpg",
+            "https://m.media-amazon.com/images/I/71u9s+L6dSL._AC_SL1500_.jpg"
         ], 
         description: "Melhore a sua postura e evite o sobreaquecimento com estrutura ajustável em alumínio." 
     },
     { 
         id: 25, name: "Fita LED RGB Inteligente Wi-Fi para TV", category: "casa", price: 25.99, 
         images: [
-            "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=600&auto=format&fit=crop&q=80",
-            "https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?w=600&auto=format&fit=crop&q=80",
-            "https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?w=600&auto=format&fit=crop&q=80",
-            "https://images.unsplash.com/photo-1557324232-b8917d3c3dcb?w=600&auto=format&fit=crop&q=80"
+            "https://m.media-amazon.com/images/I/71i0CgN3WkL._AC_SL1500_.jpg",
+            "https://m.media-amazon.com/images/I/61rU1sH7J6L._AC_SL1500_.jpg",
+            "https://m.media-amazon.com/images/I/61oP1u9k52L._AC_SL1500_.jpg",
+            "https://m.media-amazon.com/images/I/71kX+8m2WcL._AC_SL1500_.jpg"
         ], 
         description: "Iluminação ambiente controlada por telemóvel que sincroniza com música e filmes." 
     },
     { 
         id: 26, name: "Pulseira Antimosquitos Ultrassónica", category: "acessorios", price: 18.00, 
         images: [
-            "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=600&auto=format&fit=crop&q=80",
-            "https://images.unsplash.com/photo-1541872703-74c5e44368f9?w=600&auto=format&fit=crop&q=80",
-            "https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?w=600&auto=format&fit=crop&q=80",
-            "https://images.unsplash.com/photo-1583863788434-e58a36330cf0?w=600&auto=format&fit=crop&q=80"
+            "https://m.media-amazon.com/images/I/71u9s+L6dSL._AC_SL1500_.jpg",
+            "https://m.media-amazon.com/images/I/61NYiP0jvWL._AC_SL1500_.jpg",
+            "https://m.media-amazon.com/images/I/71Xm+9qG7hL._AC_SL1500_.jpg",
+            "https://m.media-amazon.com/images/I/61y2W0vS8sL._AC_SL1500_.jpg"
         ], 
         description: "Repelente sem químicos que emite ondas sonoras de baixa frequência." 
     },
     { 
         id: 27, name: "Pistola de Massagem Muscular Profunda Mini", category: "bem-estar", price: 65.00, 
         images: [
-            "https://images.unsplash.com/photo-1517838277536-f5f99be501cd?w=600&auto=format&fit=crop&q=80",
-            "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=600&auto=format&fit=crop&q=80",
-            "https://images.unsplash.com/photo-1512290900722-9a707b82b9db?w=600&auto=format&fit=crop&q=80",
-            "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=600&auto=format&fit=crop&q=80"
+            "https://m.media-amazon.com/images/I/71h35u5xOL._AC_SL1500_.jpg",
+            "https://m.media-amazon.com/images/I/61k8w1V5fUL._AC_SL1500_.jpg",
+            "https://m.media-amazon.com/images/I/71qZf2k3+1L._AC_SL1500_.jpg",
+            "https://m.media-amazon.com/images/I/71S7A25rNOL._AC_SL1500_.jpg"
         ], 
         description: "Alívio muscular profissional em tamanho de bolso com várias intensidades." 
     },
     { 
         id: 28, name: "Cortinas Automatizadas Inteligentes Motorizadas", category: "casa", price: 89.00, 
         images: [
-            "https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?w=600&auto=format&fit=crop&q=80",
-            "https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?w=600&auto=format&fit=crop&q=80",
-            "https://images.unsplash.com/photo-1557324232-b8917d3c3dcb?w=600&auto=format&fit=crop&q=80",
-            "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=600&auto=format&fit=crop&q=80"
+            "https://m.media-amazon.com/images/I/61rU1sH7J6L._AC_SL1500_.jpg",
+            "https://m.media-amazon.com/images/I/71i0CgN3WkL._AC_SL1500_.jpg",
+            "https://m.media-amazon.com/images/I/61oP1u9k52L._AC_SL1500_.jpg",
+            "https://m.media-amazon.com/images/I/71kX+8m2WcL._AC_SL1500_.jpg"
         ], 
         description: "Abra e feche as cortinas automaticamente através de horários programados ou voz." 
     },
     { 
         id: 29, name: "Mini Projetor Portátil Smart LED HD", category: "tecnologia", price: 110.00, 
         images: [
-            "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=600&auto=format&fit=crop&q=80",
-            "https://images.unsplash.com/photo-1507499739999-097706ad8914?w=600&auto=format&fit=crop&q=80",
-            "https://images.unsplash.com/photo-1583394838336-acd977736f90?w=600&auto=format&fit=crop&q=80",
-            "https://images.unsplash.com/photo-1591337676887-a217a6970a8a?w=600&auto=format&fit=crop&q=80"
+            "https://m.media-amazon.com/images/I/71S7A25rNOL._AC_SL1500_.jpg",
+            "https://m.media-amazon.com/images/I/71h35u5xOL._AC_SL1500_.jpg",
+            "https://m.media-amazon.com/images/I/71qZf2k3+1L._AC_SL1500_.jpg",
+            "https://m.media-amazon.com/images/I/71Lz8b0mGHL._AC_SL1500_.jpg"
         ], 
         description: "Transforme qualquer parede num cinema em casa com foco ajustável e altifalante." 
     },
     { 
         id: 30, name: "Capa de Telemóvel Impermeável Universal", category: "acessorios", price: 12.99, 
         images: [
-            "https://images.unsplash.com/photo-1541872703-74c5e44368f9?w=600&auto=format&fit=crop&q=80",
-            "https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?w=600&auto=format&fit=crop&q=80",
-            "https://images.unsplash.com/photo-1583863788434-e58a36330cf0?w=600&auto=format&fit=crop&q=80",
-            "https://images.unsplash.com/photo-1544652478-6653e09f18a2?w=600&auto=format&fit=crop&q=80"
+            "https://m.media-amazon.com/images/I/61NYiP0jvWL._AC_SL1500_.jpg",
+            "https://m.media-amazon.com/images/I/71Xm+9qG7hL._AC_SL1500_.jpg",
+            "https://m.media-amazon.com/images/I/61y2W0vS8sL._AC_SL1500_.jpg",
+            "https://m.media-amazon.com/images/I/71u9s+L6dSL._AC_SL1500_.jpg"
         ], 
         description: "Proteção total contra água e areia para tirar fotografias na piscina ou praia." 
     },
     { 
         id: 31, name: "Purificador de Ar Portátil com Filtro HEPA", category: "casa", price: 54.99, 
         images: [
-            "https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=600&auto=format&fit=crop&q=80",
-            "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=600&auto=format&fit=crop&q=80",
-            "https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?w=600&auto=format&fit=crop&q=80",
-            "https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?w=600&auto=format&fit=crop&q=80"
+            "https://m.media-amazon.com/images/I/71kX+8m2WcL._AC_SL1500_.jpg",
+            "https://m.media-amazon.com/images/I/61rU1sH7J6L._AC_SL1500_.jpg",
+            "https://m.media-amazon.com/images/I/71i0CgN3WkL._AC_SL1500_.jpg",
+            "https://m.media-amazon.com/images/I/61oP1u9k52L._AC_SL1500_.jpg"
         ], 
         description: "Elimina ácaros, pó e odores com filtro HEPA de alta eficiência para secretárias." 
     },
     { 
         id: 32, name: "Caneta de Impressão 3D Criativa", category: "tecnologia", price: 34.50, 
         images: [
-            "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=600&auto=format&fit=crop&q=80",
-            "https://images.unsplash.com/photo-1612815154858-60aa4c59eaa6?w=600&auto=format&fit=crop&q=80",
-            "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=600&auto=format&fit=crop&q=80",
-            "https://images.unsplash.com/photo-1591337676887-a217a6970a8a?w=600&auto=format&fit=crop&q=80"
+            "https://m.media-amazon.com/images/I/71h35u5xOL._AC_SL1500_.jpg",
+            "https://m.media-amazon.com/images/I/71S7A25rNOL._AC_SL1500_.jpg",
+            "https://m.media-amazon.com/images/I/71qZf2k3+1L._AC_SL1500_.jpg",
+            "https://m.media-amazon.com/images/I/71Lz8b0mGHL._AC_SL1500_.jpg"
         ], 
         description: "Desenhe objetos tridimensionais no ar com facilidade e temperatura ajustável." 
     },
     { 
         id: 33, name: "Esponja de Limpeza Elétrica Rotativa", category: "casa", price: 29.99, 
         images: [
-            "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=600&auto=format&fit=crop&q=80",
-            "https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=600&auto=format&fit=crop&q=80",
-            "https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?w=600&auto=format&fit=crop&q=80",
-            "https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?w=600&auto=format&fit=crop&q=80"
+            "https://m.media-amazon.com/images/I/61rU1sH7J6L._AC_SL1500_.jpg",
+            "https://m.media-amazon.com/images/I/71i0CgN3WkL._AC_SL1500_.jpg",
+            "https://m.media-amazon.com/images/I/61oP1u9k52L._AC_SL1500_.jpg",
+            "https://m.media-amazon.com/images/I/71kX+8m2WcL._AC_SL1500_.jpg"
         ], 
         description: "Cabeças rotativas intercambiáveis para remover gordura difícil na cozinha e banheiros." 
     }
@@ -495,7 +495,7 @@ function openProductDetail(productId) {
         <div class="product-detail-page">
             <button onclick="goHome()" style="background: none; border: none; color: #007185; cursor: pointer; margin-bottom: 1rem; font-weight: bold;"><i class="fa-solid fa-arrow-left"></i> Voltar aos resultados</button>
             <div class="detail-grid">
-                <!-- Coluna 1: Galeria com 4 fotos reais -->
+                <!-- Coluna 1: Galeria com 4 fotos reais oficiais -->
                 <div class="images-column">
                     <div class="main-img-container">
                         <img id="mainImageDisplay" src="${product.images[0]}" alt="${product.name}">
@@ -590,6 +590,7 @@ function removeFromCart(productId) {
     updateCart();
 }
 
+searchInput.getElementById?.("input") // handled below via listener
 searchInput.addEventListener("input", (e) => {
     const term = e.target.value.toLowerCase();
     const filtered = products.filter(p => p.name.toLowerCase().includes(term));
