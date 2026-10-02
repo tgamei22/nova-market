@@ -1,10 +1,11 @@
-# NOVA — Marketplace Dropshipping
-Loja demo premium, mobile-first, inspirada na simplicidade dos grandes marketplaces.
-Inclui catálogo, pesquisa, filtros, carrinho, checkout de demonstração, favoritos e área de encomendas.
+# Nova Market 🛒
 
-## Arrancar
-Abra `index.html` diretamente no navegador ou use:
-`python -m http.server 8000`
+Loja online moderna desenvolvida com HTML5, CSS3 e JavaScript puro. Ideal para portfólios ou pequenos projetos de comércio eletrónico.
 
-## Nota
-O checkout desta versão é demonstrativo. Para produção, ligue um processador de pagamentos, fornecedor/API de dropshipping, domínio, emails e dados legais.
+## Funcionalidades
+- Catálogo de produtos interativo com imagens dinâmicas.
+- Filtros por categoria (Tecnologia, Moda, Acessórios).
+- Barra de pesquisa em tempo real.
+- Carrinho de compras dinâmico com cálculo de totais.
+- Design totalmente responsivo para telemóveis e computadores.
+- 
