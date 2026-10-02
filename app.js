@@ -1,8 +1,7 @@
 // ==========================================
-// NOVA MARKET - APP.JS (VERSÃO COMPLETA E DEFINITIVA)
+// NOVA MARKET - APP.JS (ESTÉTICA ORIGINAL + WIDGET FLUTUANTE)
 // ==========================================
 
-// Base de dados de utilizadores e afiliados (sistema de comissão de 30%)
 let usersDatabase = [
     { email: "admin@novamarket.com", nickname: "NOVA30", balance: 50.00 }
 ];
@@ -425,66 +424,78 @@ const cartTotalPrice = document.getElementById("cartTotalPrice");
 const searchInput = document.getElementById("searchInput");
 const checkoutBtn = document.getElementById("checkoutBtn");
 
-// ==========================================
-// FUNÇÕES DE UTILIDADE E AFILIADOS
-// ==========================================
 function getOriginalPrice(price) {
     return (price / 0.7).toFixed(2);
 }
 
-// Injetar a barra de afiliados e painel de embaixador no topo
+// Injetar o Widget Flutuante Elegante no Canto Inferior Direito
 document.addEventListener("DOMContentLoaded", () => {
-    injectAffiliateHeader();
+    injectFloatingAffiliateWidget();
     displayCatalog(products);
 });
 
-function injectAffiliateHeader() {
-    let header = document.querySelector("header") || document.body;
-    if (document.getElementById("globalAffiliateBar")) return;
+function injectFloatingAffiliateWidget() {
+    if (document.getElementById("floatingAffiliateWidget")) return;
 
-    let affiliateBar = document.createElement("div");
-    affiliateBar.id = "globalAffiliateBar";
-    affiliateBar.style.cssText = "background: #232f3e; color: white; padding: 10px 20px; display: flex; justify-content: space-between; align-items: center; font-size: 0.9rem; flex-wrap: wrap; gap: 10px; border-bottom: 2px solid #ffd814;";
-    
-    updateAffiliateBarHTML(affiliateBar);
-    header.insertBefore(affiliateBar, header.firstChild);
+    let widget = document.createElement("div");
+    widget.id = "floatingAffiliateWidget";
+    widget.style.cssText = `
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background: #232f3e;
+        color: white;
+        padding: 12px 16px;
+        border-radius: 12px;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        z-index: 9999;
+        font-family: Arial, sans-serif;
+        font-size: 0.85rem;
+        border: 2px solid #ffd814;
+        max-width: 280px;
+        transition: all 0.3s ease;
+    `;
+
+    updateWidgetHTML(widget);
+    document.body.appendChild(widget);
 }
 
-function updateAffiliateBarHTML(container) {
+function updateWidgetHTML(container) {
     let userSection = "";
     if (!currentUser) {
         userSection = `
-            <div style="display: flex; align-items: center; gap: 8px;">
-                <span style="color: #ffd814; font-weight: bold;">👥 Área de Embaixador (30%):</span>
-                <button onclick="openLoginModal()" style="background: #ffd814; border: none; padding: 5px 12px; border-radius: 4px; cursor: pointer; font-weight: bold; font-size: 0.85rem;">Entrar / Criar Nick Code</button>
+            <div style="margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center;">
+                <span style="color: #ffd814; font-weight: bold;">👑 Embaixador (30%)</span>
+                <button onclick="openLoginModal()" style="background: #ffd814; border: none; padding: 4px 8px; border-radius: 4px; cursor: pointer; font-weight: bold; font-size: 0.75rem;">Entrar</button>
             </div>
         `;
     } else {
         userSection = `
-            <div style="display: flex; align-items: center; gap: 10px;">
-                <span>Olá, <strong>${currentUser.nickname}</strong> | Saldo: <strong style="color: #00ff88;">${currentUser.balance.toFixed(2)} €</strong></span>
-                <button onclick="openWalletModal()" style="background: #007600; color: white; border: none; padding: 4px 10px; border-radius: 4px; cursor: pointer; font-size: 0.8rem; font-weight: bold;">Sacar</button>
-                <button onclick="handleLogout()" style="background: transparent; color: #ff9999; border: none; cursor: pointer; font-size: 0.8rem;">Sair</button>
+            <div style="margin-bottom: 8px; font-size: 0.8rem;">
+                <span>Olá, <strong>${currentUser.nickname}</strong></span><br>
+                <span>Saldo: <strong style="color: #00ff88;">${currentUser.balance.toFixed(2)} €</strong></span>
+                <button onclick="openWalletModal()" style="background: #007600; color: white; border: none; padding: 2px 6px; border-radius: 3px; cursor: pointer; font-size: 0.75rem; margin-left: 5px;">Sacar</button>
+                <button onclick="handleLogout()" style="background: transparent; color: #ff9999; border: none; cursor: pointer; font-size: 0.75rem; float: right;">Sair</button>
             </div>
         `;
     }
 
     container.innerHTML = `
         ${userSection}
-        <div style="display: flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.1); padding: 5px 10px; border-radius: 6px;">
-            <label for="topAffiliateInput" style="font-size: 0.85rem; color: #ffd814; font-weight: bold;">🎁 Afiliado Code:</label>
-            <input type="text" id="topAffiliateInput" value="${activeAffiliateCode}" placeholder="Ex: LOURDES30" oninput="updateActiveAffiliateCode(this.value)" style="padding: 4px 8px; border-radius: 4px; border: 1px solid #ccc; text-transform: uppercase; width: 120px; font-weight: bold; font-size: 0.85rem; background: #fff; color: #000;">
-            <span id="affiliateStatusText" style="font-size: 0.75rem; font-weight: bold; color: ${activeAffiliateCode ? '#00ff88' : '#bbb'};">${activeAffiliateCode ? 'Ativo ✓' : 'Opcional'}</span>
+        <div style="border-top: 1px solid rgba(255,255,255,0.2); padding-top: 8px; display: flex; align-items: center; justify-content: space-between; gap: 8px;">
+            <label for="floatingAffCode" style="color: #ffbf00; font-weight: bold; font-size: 0.8rem;">🎁 Código:</label>
+            <input type="text" id="floatingAffCode" value="${activeAffiliateCode}" placeholder="EX: NICK" oninput="updateActiveAffiliateCode(this.value)" style="padding: 4px 6px; border-radius: 4px; border: 1px solid #ccc; text-transform: uppercase; width: 90px; font-weight: bold; font-size: 0.8rem; background: #fff; color: #000; text-align: center;">
+            <span id="widgetStatus" style="font-size: 0.75rem; font-weight: bold; color: ${activeAffiliateCode ? '#00ff88' : '#aaa'};">${activeAffiliateCode ? 'Ativo' : 'Livre'}</span>
         </div>
     `;
 }
 
 function updateActiveAffiliateCode(val) {
     activeAffiliateCode = val.trim().toUpperCase();
-    let statusSpan = document.getElementById("affiliateStatusText");
+    let statusSpan = document.getElementById("widgetStatus");
     if (statusSpan) {
-        statusSpan.style.color = activeAffiliateCode ? '#00ff88' : '#bbb';
-        statusSpan.innerText = activeAffiliateCode ? 'Ativo ✓' : 'Opcional';
+        statusSpan.style.color = activeAffiliateCode ? '#00ff88' : '#aaa';
+        statusSpan.innerText = activeAffiliateCode ? 'Ativo' : 'Livre';
     }
 }
 
@@ -507,7 +518,7 @@ function openLoginModal() {
     }
 
     currentUser = existingUser;
-    refreshAffiliateBar();
+    refreshFloatingWidget();
 }
 
 function openWalletModal() {
@@ -525,19 +536,19 @@ function openWalletModal() {
         }
         alert(`✅ Pedido de saque de ${currentUser.balance.toFixed(2)} € efetuado com sucesso!`);
         currentUser.balance = 0.00;
-        refreshAffiliateBar();
+        refreshFloatingWidget();
     }
 }
 
 function handleLogout() {
     currentUser = null;
     alert("Sessão terminada com sucesso.");
-    refreshAffiliateBar();
+    refreshFloatingWidget();
 }
 
-function refreshAffiliateBar() {
-    let bar = document.getElementById("globalAffiliateBar");
-    if (bar) updateAffiliateBarHTML(bar);
+function refreshFloatingWidget() {
+    let widget = document.getElementById("floatingAffiliateWidget");
+    if (widget) updateWidgetHTML(widget);
 }
 
 // ==========================================
@@ -721,7 +732,6 @@ function removeFromCart(productId) {
     updateCart();
 }
 
-// Eventos de Pesquisa e Carrinho
 if (searchInput) {
     searchInput.addEventListener("input", (e) => {
         const term = e.target.value.toLowerCase();
@@ -757,15 +767,14 @@ if (checkoutBtn) {
 
         let totalPrice = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
 
-        // Processar comissão se houver um Afiliado Code ativo na barra superior
         if (activeAffiliateCode) {
             let affiliateUser = usersDatabase.find(u => u.nickname === activeAffiliateCode);
             if (affiliateUser) {
-                let commission = totalPrice * 0.30; // 30% de comissão
+                let commission = totalPrice * 0.30;
                 affiliateUser.balance += commission;
-                alert(`✨ Compra efetuada com sucesso!\nO código de afiliado "${activeAffiliateCode}" foi aplicado. O embaixador recebeu ${commission.toFixed(2)} € de comissão (30%).`);
+                alert(`✨ Compra efetuada com sucesso!\nO código "${activeAffiliateCode}" foi aplicado. O embaixador recebeu ${commission.toFixed(2)} € de comissão (30%).`);
             } else {
-                alert("Compra efetuada com sucesso! (Nota: O código de afiliado inserido não foi encontrado na base de dados, por isso nenhuma comissão foi atribuída).");
+                alert("Compra efetuada com sucesso! (Nota: O código de afiliado inserido não foi encontrado na base de dados).");
             }
         } else {
             alert("Compra simulada com sucesso! Obrigado pela preferência na Nova Market.");
@@ -777,5 +786,4 @@ if (checkoutBtn) {
     });
 }
 
-// Arranque inicial do catálogo
 displayCatalog(products);
