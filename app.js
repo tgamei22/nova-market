@@ -1,25 +1,146 @@
-const products=[
-{id:1,n:'Pulse Buds Pro',cat:'Tecnologia',price:49.90,old:79.90,icon:'🎧',badge:'TOP',desc:'Auriculares sem fios com cancelamento de ruído.'},
-{id:2,n:'Halo Desk Lamp',cat:'Casa',price:34.90,old:54.90,icon:'💡',badge:'NOVO',desc:'Luz ambiente minimalista com controlo tátil.'},
-{id:3,n:'Aero Bottle 750',cat:'Lifestyle',price:24.90,old:34.90,icon:'🥤',badge:'FAVORITO',desc:'Garrafa térmica leve para todos os dias.'},
-{id:4,n:'Orbit Mag Stand',cat:'Tecnologia',price:29.90,old:44.90,icon:'📱',badge:'TOP',desc:'Suporte magnético elegante para secretária.'},
-{id:5,n:'Cloud Mini Backpack',cat:'Acessórios',price:39.90,old:59.90,icon:'🎒',badge:'NOVO',desc:'Mochila compacta para trabalho e viagens.'},
-{id:6,n:'Aura Sleep Mask',cat:'Lifestyle',price:19.90,old:29.90,icon:'😴',badge:'',desc:'Máscara macia para uma rotina de descanso.'},
-{id:7,n:'Stone Aroma Diffuser',cat:'Casa',price:42.90,old:64.90,icon:'🪨',badge:'TOP',desc:'Difusor silencioso com acabamento mineral.'},
-{id:8,n:'Snap Cable Kit',cat:'Tecnologia',price:16.90,old:24.90,icon:'🔌',badge:'',desc:'Kit de cabos compactos para a secretária.'}
+// Base de dados simulada de produtos
+const products = [
+    { id: 1, name: "Headphones Sem Fios", category: "tecnologia", price: 59.99, image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500&auto=format&fit=crop&q=60" },
+    { id: 2, name: "Smartwatch Desportivo", category: "tecnologia", price: 89.99, image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500&auto=format&fit=crop&q=60" },
+    { id: 3, name: "Ténis Urbanos", category: "moda", price: 45.00, image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500&auto=format&fit=crop&q=60" },
+    { id: 4, name: "Mochila Executiva", category: "acessorios", price: 39.99, image: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=500&auto=format&fit=crop&q=60" },
+    { id: 5, name: "Óculos de Sol Clássicos", category: "acessorios", price: 25.50, image: "https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=500&auto=format&fit=crop&q=60" },
+    { id: 6, name: "Camisola Casual de Malha", category: "moda", price: 34.00, image: "https://images.unsplash.com/photo-1434389677669-e08b4cac3105?w=500&auto=format&fit=crop&q=60" }
 ];
-let cart=JSON.parse(localStorage.getItem('novaCart')||'[]'), filtered=products;
-const euro=n=>n.toLocaleString('pt-PT',{style:'currency',currency:'EUR'});
-function render(list=filtered){const el=document.getElementById('products');document.getElementById('resultInfo').textContent=`${list.length} produtos`;
-el.innerHTML=list.map(p=>`<article class="card"><div class="pic">${p.badge?`<span class="badge">${p.badge}</span>`:''}<button class="heart" onclick="toast('Adicionado aos favoritos')">♡</button>${p.icon}</div><div class="info"><span class="cat">${p.cat}</span><h3>${p.n}</h3><p class="muted">${p.desc}</p><div class="price"><strong>${euro(p.price)}</strong><span class="old">${euro(p.old)}</span></div><button class="add" onclick="add(${p.id})">Adicionar ao carrinho</button></div></article>`).join('')}
-function add(id){const x=cart.find(i=>i.id===id);x?x.qty++:cart.push({id,qty:1});save();toast('Produto adicionado ao carrinho');}
-function save(){localStorage.setItem('novaCart',JSON.stringify(cart));document.getElementById('count').textContent=cart.reduce((a,b)=>a+b.qty,0);renderCart()}
-function renderCart(){const el=document.getElementById('cartItems');let total=0;if(!cart.length){el.innerHTML='<p class="muted">O carrinho está vazio. Descobre os nossos favoritos.</p>';document.getElementById('total').textContent=euro(0);return}el.innerHTML=cart.map(i=>{let p=products.find(x=>x.id===i.id);total+=p.price*i.qty;return `<div class="cartRow"><div class="thumb">${p.icon}</div><div><b>${p.n}</b><div class="muted">${euro(p.price)} · <span class="qty"><button onclick="change(${p.id},-1)">−</button> ${i.qty} <button onclick="change(${p.id},1)">+</button></span></div></div><button class="close" style="width:26px;height:26px;font-size:17px" onclick="removeItem(${p.id})">×</button></div>`}).join('');document.getElementById('total').textContent=euro(total)}
-function change(id,d){let x=cart.find(i=>i.id===id);x.qty+=d;if(x.qty<1)cart=cart.filter(i=>i.id!==id);save()}function removeItem(id){cart=cart.filter(i=>i.id!==id);save()}
-function openCart(){renderCart();document.getElementById('overlay').classList.add('show')}function closeCart(){document.getElementById('overlay').classList.remove('show')}
-function checkout(){if(!cart.length)return toast('Adiciona primeiro um produto');toast('Checkout de demonstração — pagamento não configurado');}
-function toast(s){const t=document.getElementById('toast');t.textContent=s;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2200)}
-function doSearch(){const q=document.getElementById('search').value.toLowerCase();filtered=products.filter(p=>(p.n+p.cat+p.desc).toLowerCase().includes(q));render(filtered)}
-document.getElementById('search').addEventListener('keydown',e=>{if(e.key==='Enter')doSearch()});
-document.querySelectorAll('#chips button').forEach(b=>b.onclick=()=>{document.querySelectorAll('#chips button').forEach(x=>x.classList.remove('active'));b.classList.add('active');const c=b.dataset.cat;filtered=c==='Todos'?products:products.filter(p=>p.cat===c);render(filtered)});
-render();save();
+
+let cart = [];
+
+// Elementos do DOM
+const productsGrid = document.getElementById("productsGrid");
+const cartBtn = document.getElementById("cartBtn");
+const cartModal = document.getElementById("cartModal");
+const closeCart = document.getElementById("closeCart");
+const cartItemsContainer = document.getElementById("cartItems");
+const cartCount = document.getElementById("cartCount");
+const cartTotalPrice = document.getElementById("cartTotalPrice");
+const searchInput = document.getElementById("searchInput");
+const categoryButtons = document.querySelectorAll(".cat-btn");
+const checkoutBtn = document.getElementById("checkoutBtn");
+
+// Mostrar Produtos na Página
+function displayProducts(productsToDisplay) {
+    productsGrid.innerHTML = "";
+    if (productsToDisplay.length === 0) {
+        productsGrid.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: #777;">Nenhum produto encontrado.</p>`;
+        return;
+    }
+    
+    productsToDisplay.forEach(product => {
+        const card = document.createElement("div");
+        card.classList.add("product-card");
+        card.innerHTML = `
+            <img src="${product.image}" alt="${product.name}">
+            <div class="product-info">
+                <div>
+                    <h3>${product.name}</h3>
+                    <div class="product-price">${product.price.toFixed(2)} €</div>
+                </div>
+                <button class="add-to-cart" onclick="addToCart(${product.id})">Adicionar ao Carrinho</button>
+            </div>
+        `;
+        productsGrid.appendChild(card);
+    });
+}
+
+// Adicionar ao Carrinho
+function addToCart(productId) {
+    const product = products.find(p => p.id === productId);
+    const cartItem = cart.find(item => item.id === productId);
+
+    if (cartItem) {
+        cartItem.quantity += 1;
+    } else {
+        cart.push({ ...product, quantity: 1 });
+    }
+    updateCart();
+}
+
+// Atualizar Carrinho UI
+function updateCart() {
+    cartItemsContainer.innerHTML = "";
+    let totalItems = 0;
+    let totalPrice = 0;
+
+    cart.forEach(item => {
+        totalItems += item.quantity;
+        totalPrice += item.price * item.quantity;
+
+        const cartItemDiv = document.createElement("div");
+        cartItemDiv.classList.add("cart-item");
+        cartItemDiv.innerHTML = `
+            <div>
+                <h4>${item.name}</h4>
+                <p>${item.price.toFixed(2)} € x ${item.quantity}</p>
+            </div>
+            <button onclick="removeFromCart(${item.id})" style="background: #e74c3c; color: white; border: none; padding: 4px 8px; border-radius: 4px; cursor: pointer;">Remover</button>
+        `;
+        cartItemsContainer.appendChild(cartItemDiv);
+    });
+
+    cartCount.innerText = totalItems;
+    cartTotalPrice.innerText = totalPrice.toFixed(2) + " €";
+}
+
+// Remover do Carrinho
+function removeFromCart(productId) {
+    cart = cart.filter(item => item.id !== productId);
+    updateCart();
+}
+
+// Filtrar por Categoria
+categoryButtons.forEach(button => {
+    button.addEventListener("click", (e) => {
+        categoryButtons.forEach(btn => btn.classList.remove("active"));
+        e.target.classList.add("active");
+
+        const category = e.target.getAttribute("data-category");
+        if (category === "all") {
+            displayProducts(products);
+        } else {
+            const filtered = products.filter(p => p.category === category);
+            displayProducts(filtered);
+        }
+    });
+});
+
+// Barra de Pesquisa
+searchInput.addEventListener("input", (e) => {
+    const term = e.target.value.toLowerCase();
+    const filtered = products.filter(p => p.name.toLowerCase().includes(term));
+    displayProducts(filtered);
+});
+
+// Abertura e fecho do Modal do Carrinho
+cartBtn.addEventListener("click", () => {
+    cartModal.style.display = "flex";
+});
+
+closeCart.addEventListener("click", () => {
+    cartModal.style.display = "none";
+});
+
+window.addEventListener("click", (e) => {
+    if (e.target === cartModal) {
+        cartModal.style.display = "none";
+    }
+});
+
+// Finalizar Compra
+checkoutBtn.addEventListener("click", () => {
+    if (cart.length === 0) {
+        alert("O seu carrinho está vazio!");
+        return;
+    }
+    alert("Compra simulada com sucesso! Obrigado pela preferência na Nova Market.");
+    cart = [];
+    updateCart();
+    cartModal.style.display = "none";
+});
+
+// Inicializar página
+displayProducts(products);
